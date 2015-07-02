@@ -33,7 +33,7 @@ class MessagesController < ApplicationController
 		})
 
     if @message.save
-			@message.respond(params[:sms_sid])
+			@message.respond(@message.sms_sid)
       render xml: @message, status: :created, location: @message
     else
       render xml: @message.errors, status: :unprocessable_entity
