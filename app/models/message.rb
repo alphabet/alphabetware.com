@@ -7,7 +7,7 @@ class Message < ActiveRecord::Base
 
 	def respond(sid)
 		client = Twilio::REST::Client.new ACCOUNT_SID, AUTH_TOKEN
-	  sender = Message.where(sms_message_sid: sid).order(:updated_at).last	
+	  sender = Message.where(sms_sid: sid).order(:updated_at).last	
 
 		client.account.messages.create(
 			:from => FROM,
