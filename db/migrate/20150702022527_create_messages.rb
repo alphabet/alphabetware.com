@@ -1,8 +1,8 @@
 class CreateMessages < ActiveRecord::Migration
   def change
     create_table :messages do |t|
-			t.integer :to_phone, :limit => 11
-			t.integer :from_phone, :limit => 11
+			t.integer :to_phone, :limit => 8 
+			t.integer :from_phone, :limit => 8
 			t.string :body
 			t.string :to_country
 		  t.string :to_state
