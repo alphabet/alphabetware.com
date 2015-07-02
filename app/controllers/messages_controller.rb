@@ -1,0 +1,72 @@
+class MessagesController < ApplicationController
+  before_action :set_message, only: [:show, :update, :destroy]
+
+  # GET /messages
+  # GET /messages.json
+  def index
+    @messages = Message.all
+
+    render json: @messages
+  end
+
+  # GET /messages/1
+  # GET /messages/1.json
+  def show
+    render json: @message
+  end
+
+  # POST /messages
+  # POST /messages.json
+  def create
+    params = request.params
+		@message = Message.new({
+			to_phone: params[:To],
+			from_phone: params[:From], 
+			body: params[:Body],
+			from_country: params[:FromCountry],
+			from_state: params[:FromState],
+			from_city: params[:FromCity],
+			from_zip: params[:FromZip],
+			sms_sid: params[:SmsSid],
+			account_sid: params[:AccountSid],
+			twilio_api_version: params[:ApiVersion]
+		})
+
+    if @message.save
+			@message.respond(params[:sms_sid])
+      render xml: @message, status: :created, location: @message
+    else
+      render xml: @message.errors, status: :unprocessable_entity
+    end
+  end
+
+  # PATCH/PUT /messages/1
+  # PATCH/PUT /messages/1.json
+  def update
+    @message = Message.find(params[:id])
+
+    if @message.update(message_params)
+      head :no_content
+    else
+      render json: @message.errors, status: :unprocessable_entity
+    end
+  end
+
+  # DELETE /messages/1
+  # DELETE /messages/1.json
+  def destroy
+    @message.destroy
+
+    head :no_content
+  end
+
+  private
+
+    def set_message
+      @message = Message.find(params[:id])
+    end
+
+    def message_params
+      params[:message]
+    end
+end
