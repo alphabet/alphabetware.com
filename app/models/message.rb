@@ -1,7 +1,7 @@
 class Message < ActiveRecord::Base
-  has_many :medias
-	
-	validates :from_phone, :body, presence: true
+	has_many :medias
+
+	validates :from_phone, presence: true
 
 	def upload
 	end
@@ -19,8 +19,9 @@ class Message < ActiveRecord::Base
 		outgoing = client.account.messages.create(:from => from_phone, :to => to_phone, :body => body, :media_url => media_url)
 
 		media = Media.new(:parent_sid => outgoing.sid, :account_sid => outgoing.account_sid)
-		message = Message.new(:from_phone => outgoing.from, :to_phone => outgoing.to, :body => outgoing.body, :medias => [media], 
-								:sms_sid => outgoing.sid, :account_sid => outgoing.account_sid, :twilio_api_version => outgoing.api_version)
+		message = Message.new(:from_phone => outgoing.from, :to_phone => outgoing.to, :body => outgoing.body, :medias => [media],
+													:media_url => media_url, :sms_sid => outgoing.sid, :account_sid => outgoing.account_sid, 
+													:twilio_api_version => outgoing.api_version)
 		message.save!
 	end
 
