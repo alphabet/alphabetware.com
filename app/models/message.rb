@@ -18,7 +18,7 @@ class Message < ActiveRecord::Base
 
 		from_phone = FROM
 		to_phone = self.from_phone 
-		body = replies[rand(replies.length)] + "\n\nWould you like to check with someone in your area in #{self.from_state.to_s.strip}"
+		body = replies[rand(replies.length)] + "\n\nWould you like to us to connect you with someone in your area: i.e., near #{(self.from_city.to_s.strip + ' ' + self.from_state.to_s.strip).strip}"
 		media_url = response_attachments[rand(response_attachments.length)] 
 		outgoing = client.account.messages.create(:from => from_phone, :to => to_phone, :body => body, :media_url => media_url)
 
