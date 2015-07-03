@@ -1,5 +1,6 @@
 class MessagesController < ApplicationController
-  before_action :set_message, only: [:show, :update, :destroy]
+
+	before_action :set_message, only: [:show, :update, :destroy]
 
   # GET /messages
   # GET /messages.json
@@ -19,7 +20,7 @@ class MessagesController < ApplicationController
   # POST /messages.json
   def create
     params = request.params
-		@message = Message.new({
+		@incoming= Message.new({
 			to_phone: params[:To],
 			from_phone: params[:From], 
 			body: params[:Body],
@@ -32,11 +33,11 @@ class MessagesController < ApplicationController
 			twilio_api_version: params[:ApiVersion]
 		})
 
-    if @message.save
-			@message.respond(@message.sms_sid)
-      render xml: @message, status: :created, location: @message
+    if @incoming.save
+			@incoming.respond
+      render xml: @incoming, status: :created, location: @incoming
     else
-      render xml: @message.errors, status: :unprocessable_entity
+      render xml: @incoming.errors, status: :unprocessable_entity
     end
   end
 
