@@ -24,9 +24,12 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # sms library
 gem 'twilio-ruby'
 gem 'rails-api'
-gem 'paperclip'
+#gem 'paperclip'
+#gem 'aws-sdk'
 gem 'puma'
-
+gem 'cloudsight', :git => 'git://github.com/cloudsight/cloudsight-ruby'
+gem 'rest-client'
+gem 'simple_oauth'
 
 group :production, :qa do
 	gem 'rails_12factor' # this is for heroku

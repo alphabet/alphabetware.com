@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150703041546) do
+ActiveRecord::Schema.define(version: 20150705041633) do
 
   create_table "medias", force: :cascade do |t|
     t.string   "message_id"
@@ -25,6 +25,8 @@ ActiveRecord::Schema.define(version: 20150703041546) do
     t.datetime "destroyed_at"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.string   "description"
+    t.datetime "described_at"
   end
 
   create_table "messages", force: :cascade do |t|
