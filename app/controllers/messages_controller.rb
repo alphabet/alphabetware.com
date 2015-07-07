@@ -32,7 +32,7 @@ class MessagesController < ApplicationController
 			account_sid: params[:AccountSid],
 			twilio_api_version: params[:ApiVersion]
 		})
-		@incoming.medias <<  [Media.new(:parent_sid => sms_sid, :media_url => params[:MediaUrl])] if params[:MediaUrl] # should do for each params[:NumMedia]
+		@incoming.medias <<  [Media.new(:parent_sid => @incoming.sms_sid, :media_url => params[:MediaUrl])] if params[:MediaUrl] # should do for each params[:NumMedia]
    
 	 	if @incoming.save
 			@incoming.respond

@@ -22,20 +22,20 @@ class Media < ActiveRecord::Base
 
 	def newly_described?
 		logger.info "checking if new #{self.described_at.nil?}"
-		self.described_at.nil?
+		self.described_at.nil? && self.description.nil?
 	end
 
 	def identification_complete
 		puts 'completing identification'
-		self.cloudsight
+		self.description = self.cloudsight
 	end
 
 	def cloudsight
-		Cloudsight.api_key = CONSUMER_KEY
-		#		Cloudsight.oauth_options = { consumer_key: CONSUMER_KEY, consumer_secret: CONSUMER_SECRET}
+		#Cloudsight.api_key = CONSUMER_KEY
+		Cloudsight.oauth_options = { consumer_key: CONSUMER_KEY, consumer_secret: CONSUMER_SECRET}
 		request = Cloudsight::Request.send(locale: 'en', url: self.media_url)
 		Cloudsight::Response.retrieve(request['token']) do |response|
-			self.description = response['name'] if response['status']=='completed'
+			response['name'] if response['status']=='completed'
 		end
 	end
 
