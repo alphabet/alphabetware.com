@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150705041633) do
+ActiveRecord::Schema.define(version: 20150706153126) do
 
   create_table "medias", force: :cascade do |t|
     t.string   "message_id"
@@ -49,6 +49,8 @@ ActiveRecord::Schema.define(version: 20150705041633) do
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
     t.string   "media_url"
+    t.string   "message_type"
+    t.datetime "sent_at"
   end
 
 end

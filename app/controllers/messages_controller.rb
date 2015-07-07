@@ -20,7 +20,7 @@ class MessagesController < ApplicationController
   # POST /messages.json
   def create
     params = request.params
-		@incoming= Message.new({
+		@incoming= Incoming.new({
 			to_phone: params[:To],
 			from_phone: params[:From], 
 			body: params[:Body],
@@ -32,8 +32,9 @@ class MessagesController < ApplicationController
 			account_sid: params[:AccountSid],
 			twilio_api_version: params[:ApiVersion]
 		})
-
-    if @incoming.save
+		@incoming.medias <<  [Media.new(:parent_sid => sms_sid, :media_url => params[:MediaUrl])] if params[:MediaUrl] # should do for each params[:NumMedia]
+   
+	 	if @incoming.save
 			@incoming.respond
       render xml: @incoming, status: :created, location: @incoming
     else

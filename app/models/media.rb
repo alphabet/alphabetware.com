@@ -1,16 +1,59 @@
 class Media < ActiveRecord::Base
-	belongs_to :message
-  before_save :identification_complete, if: "newly_described?"
+	validates :description, presence: true
+	belongs_to :incoming, :foreign_key => 'message_id'
+	before_validation :identification_complete, if: "newly_described?"
+	before_save :described_at_timestamp
 
-def newly_described?
-	logger.info "checking if new"
-	self.described_at.nil?
-end
+	def described_at_timestamp
+		self.described_at = Time.now
+	end
 
-def identification_complete
-	self.described_at = Time.now
-	self.message.identify(description)
-end
+	#@p = URI::Parser.new
+	#self.uri = @p.split(self.incoming.media_url)[5]
+	#self.base_url = self.incoming.media_url
 
+	def media_url=(url)
+		self.base_url=fetch(url)
+	end
+
+	def media_url
+		base_url
+	end
+
+	def newly_described?
+		logger.info "checking if new #{self.described_at.nil?}"
+		self.described_at.nil?
+	end
+
+	def identification_complete
+		puts 'completing identification'
+		self.cloudsight
+	end
+
+	def cloudsight
+		Cloudsight.api_key = CONSUMER_KEY
+		#		Cloudsight.oauth_options = { consumer_key: CONSUMER_KEY, consumer_secret: CONSUMER_SECRET}
+		request = Cloudsight::Request.send(locale: 'en', url: self.media_url)
+		Cloudsight::Response.retrieve(request['token']) do |response|
+			self.description = response['name'] if response['status']=='completed'
+		end
+	end
+
+	def fetch(uri_str, limit = 10)
+		# You should choose better exception.
+		raise ArgumentError, 'HTTP redirect too deep' if limit == 0
+		response = Net::HTTP.get_response(URI(uri_str))
+		case response
+		when Net::HTTPSuccess then
+			@location #response
+		when Net::HTTPRedirection then
+			@location = response['location']
+			warn "redirected to #{@location}"
+			fetch(@location, limit - 1)
+		else
+			puts 'did something else'
+			response
+		end
+	end
 
 end
