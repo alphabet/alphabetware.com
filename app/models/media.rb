@@ -56,7 +56,8 @@ class Media < ActiveRecord::Base
 		
 		case response
 		when Net::HTTPSuccess then
-			@location.nil? ? uri.scheme + '://' + uri.host + uri.request_uri : @location 
+			sleep 0.5
+			@location.nil? ? uri_str : @location 
 		when Net::HTTPRedirection then
 			@location = response['location']
 			sleep 0.5 
