@@ -1,10 +1,14 @@
 class Outgoing < Message 
 	validates :body, presence: true
 	validate :from_cannot_be_same_as_to
+	before_validation :set_from_phone
 	before_save :send_twilio_message
 
-	def send_twilio_message
+	def set_from_phone
 		self.from_phone = FROM
+	end
+
+	def send_twilio_message
 		client = Twilio::REST::Client.new ACCOUNT_SID, AUTH_TOKEN 
 		if self.valid?
 			outgoing = client.account.messages.create(:from => from_phone, 

@@ -42,7 +42,7 @@ class MessagesController < ApplicationController
 															 to_city: @incoming.from_city,
 															 to_zip: @incoming.to_zip
 															)
-			@outgoing.save
+			@outgoing.save!
       render xml: @incoming, status: :created
     else
       render xml: @incoming.errors, status: :unprocessable_entity
