@@ -5,7 +5,7 @@ class Media < ActiveRecord::Base
 	before_save :described_at_timestamp
 
 	def described_at_timestamp
-		self.described_at = Time.now
+		described_at = Time.now
 	end
 
 	#@p = URI::Parser.new
@@ -17,8 +17,8 @@ class Media < ActiveRecord::Base
 	end
 
 	def media_url
-		puts 'media_url is ' + base_url
-		base_url
+		puts "media_url is #{self.base_url.to_s}"
+		self.base_url
 	end
 
 	def newly_described?
@@ -48,7 +48,7 @@ class Media < ActiveRecord::Base
 		response = Net::HTTP.get_response(URI(uri_str))
 		case response
 		when Net::HTTPSuccess then
-			@location #response
+			@location.nil? ? uri_str : @location 
 		when Net::HTTPRedirection then
 			@location = response['location']
 			warn "redirected to #{@location}"

@@ -1,7 +1,9 @@
 class Outgoing < Message 
 	validates :body, presence: true
 	validate :from_cannot_be_same_as_to
-	def send_message_and_save
+	before_save :send_twilio_message
+
+	def send_twilio_message
 		self.from_phone = FROM
 		client = Twilio::REST::Client.new ACCOUNT_SID, AUTH_TOKEN 
 		if self.valid?
@@ -11,9 +13,8 @@ class Outgoing < Message
 			self.sms_sid = outgoing.sid
 			self.account_sid = outgoing.account_sid 
 			self.twilio_api_version = outgoing.api_version
+			self.sent_at = Time.now
 		end
-		debugger
-		self.save!
 	end
 
 
