@@ -37,9 +37,9 @@ class Media < ActiveRecord::Base
 		logger.info("fetching #{base_url}")
 		request = Cloudsight::Request.send(locale: 'en', url: self.base_url)
 		Cloudsight::Response.retrieve(request['token']) do |response|
-			response_text = response['name'] #if response['status']=='completed'
+			@response_text = response['name'] #if response['status']=='completed'
 		end
-		response_text
+		@response_text
 	end
 
 	def fetch(uri_str, limit = 10)
