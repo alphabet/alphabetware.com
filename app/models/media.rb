@@ -55,7 +55,7 @@ class Media < ActiveRecord::Base
 		
 		case response
 		when Net::HTTPSuccess then
-			@location.nil? ? twilio.scheme + '://' + twilio.host + uri.request_uri : @location 
+			@location.nil? ? twilio.scheme + '://' + uri.host + uri.request_uri : @location 
 		when Net::HTTPRedirection then
 			@location = response['location']
 			sleep 0.5 
