@@ -45,13 +45,20 @@ class Media < ActiveRecord::Base
 	def fetch(uri_str, limit = 10)
 		# You should choose better exception.
 		raise ArgumentError, 'HTTP redirect too deep' if limit == 0
-		response = Net::HTTP.get_response(URI(uri_str))
+		uri = URI.parse(uri_str)
+		twilio = URI.parse('https://media.twiliocdn.com')
+		http = Net::HTTP.new(twilio.host, twilio.port)
+		http.use_ssl = true if http.port == 443
+
+		request = Net::HTTP::Get.new(uri.request_uri)
+		response = http.request(request)
+		
 		case response
 		when Net::HTTPSuccess then
-			@location.nil? ? uri_str : @location 
+			@location.nil? ? twilio.scheme + '://' + twilio.host + uri.request_uri : @location 
 		when Net::HTTPRedirection then
 			@location = response['location']
-			sleep 0.75 
+			sleep 0.5 
 			warn "redirected to #{@location}"
 			fetch(@location, limit - 1)
 		else
