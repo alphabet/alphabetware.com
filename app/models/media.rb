@@ -34,7 +34,7 @@ class Media < ActiveRecord::Base
 	def cloudsight
 #		Cloudsight.api_key = CONSUMER_KEY
 		Cloudsight.oauth_options = { consumer_key: CONSUMER_KEY, consumer_secret: CONSUMER_SECRET}
-		logger.info("fetching #{base_url}")
+		logger.info("fetching #{media_url}")
 		request = Cloudsight::Request.send(locale: 'en', url: media_url)
 		Cloudsight::Response.retrieve(request['token']) do |response|
 			@response_text = response['name'] #if response['status']=='completed'
@@ -51,6 +51,7 @@ class Media < ActiveRecord::Base
 			@location.nil? ? uri_str : @location 
 		when Net::HTTPRedirection then
 			@location = response['location']
+			sleep 0.75 
 			warn "redirected to #{@location}"
 			fetch(@location, limit - 1)
 		else
