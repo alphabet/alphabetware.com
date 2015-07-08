@@ -34,8 +34,8 @@ class Media < ActiveRecord::Base
 	def cloudsight
 #		Cloudsight.api_key = CONSUMER_KEY
 		Cloudsight.oauth_options = { consumer_key: CONSUMER_KEY, consumer_secret: CONSUMER_SECRET}
-		logger.info("fetching #{media_url}")
-		request = Cloudsight::Request.send(locale: 'en', url: media_url)
+		logger.info("fetching #{self.media_url}")
+		request = Cloudsight::Request.send(locale: 'en', url: self.media_url)
 		Cloudsight::Response.retrieve(request['token']) do |response|
 			@response_text = response['name'] #if response['status']=='completed'
 		end
@@ -44,6 +44,7 @@ class Media < ActiveRecord::Base
 
 	def fetch(uri_str, limit = 10)
 		# You should choose better exception.
+		logger.info("### fetch #{limit} #{uri_str}")
 		raise ArgumentError, 'HTTP redirect too deep' if limit == 0
 		uri = URI.parse(uri_str)
 		twilio = URI.parse('https://api.twilio.com')
