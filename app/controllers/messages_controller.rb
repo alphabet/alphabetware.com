@@ -37,7 +37,10 @@ class MessagesController < ApplicationController
    
 	 	if @incoming.save!
 			@outgoing = Outgoing.new(to_phone: @incoming.from_phone, 
-															 body: "It looks like you have a #{@incoming.medias.first.description.titleize}.",
+															 body: (
+																  @incoming.medias.count > 0 ? 
+																 	"It looks like you have a #{@incoming.medias.first.description.titleize}." : "We did not receive your attachment. Did you send one?"
+																	),
 															 to_country: @incoming.from_country,
 															 to_city: @incoming.from_city,
 															 to_zip: @incoming.to_zip
