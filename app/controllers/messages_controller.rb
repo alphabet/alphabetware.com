@@ -30,13 +30,15 @@ class MessagesController < ApplicationController
 			from_zip: params[:FromZip],
 			sms_sid: params[:SmsSid],
 			account_sid: params[:AccountSid],
-			twilio_api_version: params[:ApiVersion]
+			twilio_api_version: params[:ApiVersion],
+			media_url: params[:MediaUrl]
 		})
 		@incoming.medias <<  [Media.new(:parent_sid => @incoming.sms_sid, :media_url => params[:MediaUrl])] if params[:MediaUrl] # should do for each params[:NumMedia]
    
 	 	if @incoming.save
-			@incoming.respond
-      render xml: @incoming, status: :created, location: @incoming
+			@outgoing = Outgoing.new(to_phone: @incoming.from_phone, body: @incoming.medias.first.description)
+			@outgoing.send_message_and_save
+      render xml: @incoming, status: :created
     else
       render xml: @incoming.errors, status: :unprocessable_entity
     end

@@ -17,6 +17,7 @@ class Media < ActiveRecord::Base
 	end
 
 	def media_url
+		puts 'media_url is ' + base_url
 		base_url
 	end
 
@@ -31,12 +32,14 @@ class Media < ActiveRecord::Base
 	end
 
 	def cloudsight
-		#Cloudsight.api_key = CONSUMER_KEY
+#		Cloudsight.api_key = CONSUMER_KEY
 		Cloudsight.oauth_options = { consumer_key: CONSUMER_KEY, consumer_secret: CONSUMER_SECRET}
-		request = Cloudsight::Request.send(locale: 'en', url: self.media_url)
+		logger.info("fetching #{base_url}")
+		request = Cloudsight::Request.send(locale: 'en', url: self.base_url)
 		Cloudsight::Response.retrieve(request['token']) do |response|
-			response['name'] if response['status']=='completed'
+			response_text = response['name'] #if response['status']=='completed'
 		end
+		response_text
 	end
 
 	def fetch(uri_str, limit = 10)
