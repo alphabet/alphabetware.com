@@ -46,7 +46,7 @@ class Media < ActiveRecord::Base
 		# You should choose better exception.
 		raise ArgumentError, 'HTTP redirect too deep' if limit == 0
 		uri = URI.parse(uri_str)
-		twilio = URI.parse('https://media.twiliocdn.com')
+		twilio = URI.parse('https://api.twilio.com')
 		http = Net::HTTP.new(twilio.host, twilio.port)
 		http.use_ssl = true if http.port == 443
 
