@@ -35,7 +35,7 @@ class MessagesController < ApplicationController
 		})
 		@incoming.medias <<  [Media.new(:parent_sid => @incoming.sms_sid, :media_url => params[:MediaUrl])] if params[:MediaUrl] # should do for each params[:NumMedia]
    
-	 	if @incoming.save
+	 	if @incoming.save!
 			@outgoing = Outgoing.new(to_phone: @incoming.from_phone, 
 															 body: "It looks like you have a #{@incoming.medias.first.description.titleize}.",
 															 to_country: @incoming.from_country,
