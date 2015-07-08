@@ -47,13 +47,9 @@ class Media < ActiveRecord::Base
 		logger.info("### fetch #{limit} #{uri_str}")
 		raise ArgumentError, 'HTTP redirect too deep' if limit == 0
 		uri = URI.parse(uri_str)
-		twilio = URI.parse('https://api.twilio.com')
-		http = Net::HTTP.new(twilio.host, twilio.port)
-		http.use_ssl = true if http.port == 443
-
-		request = Net::HTTP::Get.new(uri.request_uri)
+		request = Net::HTTP::Get.new(uri.request_uri, uri.port)
+		request.use_ssl = true if request.port == 443
 		response = http.request(request)
-		
 		case response
 		when Net::HTTPSuccess then
 			sleep 0.5
