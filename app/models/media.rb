@@ -13,12 +13,11 @@ class Media < ActiveRecord::Base
 	#self.base_url = self.incoming.media_url
 
 	def media_url=(url)
-		self.base_url=fetch(url)
+		self.base_url=url
 	end
 
 	def media_url
-		puts "base media_url is #{self.base_url.to_s}"
-		fetch(self.base_url)
+		self.base_url
 	end
 
 	def newly_described?
@@ -32,10 +31,12 @@ class Media < ActiveRecord::Base
 	end
 
 	def cloudsight
-#		Cloudsight.api_key = CONSUMER_KEY
-		Cloudsight.oauth_options = { consumer_key: CONSUMER_KEY, consumer_secret: CONSUMER_SECRET}
-		logger.info("fetching #{self.media_url}")
-		request = Cloudsight::Request.send(locale: 'en', url: self.media_url)
+		Cloudsight.api_key = CONSUMER_KEY if Cloudsight.api_key.nil?
+#		Cloudsight.oauth_options = { consumer_key: CONSUMER_KEY, consumer_secret: CONSUMER_SECRET}
+#		Cloudsight.base_url = 'http://posttestserver.com/post.php'
+
+		#		File.open(@filename_path, 'wb') { |file| file.write( (fetch(self.base_url)))}
+		request = Cloudsight::Request.send(locale: 'en-US', url: fetch(self.base_url))
 		Cloudsight::Response.retrieve(request['token']) do |response|
 			@response_text = response['name'] #if response['status']=='completed'
 		end
@@ -47,21 +48,23 @@ class Media < ActiveRecord::Base
 		logger.info("### fetch #{limit} #{uri_str}")
 		raise ArgumentError, 'HTTP redirect too deep' if limit == 0
 		uri = URI.parse(uri_str)
-		request = Net::HTTP::Get.new(uri.request_uri, uri.port)
-		request.use_ssl = true if request.port == 443
-		response = http.request(request)
+		Net::HTTP.start(uri.host, uri.port, :use_ssl => uri.scheme == 'https') do |http|
+			request = Net::HTTP::Get.new uri
+			response = http.request(request)
 		case response
-		when Net::HTTPSuccess then
-			sleep 0.5
-			@location.nil? ? uri_str : @location 
-		when Net::HTTPRedirection then
-			@location = response['location']
-			sleep 0.5 
-			warn "redirected to #{@location}"
-			fetch(@location, limit - 1)
-		else
-			puts 'did something else'
-			response
+  		when Net::HTTPSuccess then
+  			sleep 0.15
+  			logger.info "returning with #{@location.nil? ? uri_str : @location }"
+				@location.nil? ? uri_str : @location 
+  		when Net::HTTPRedirection then
+  			@location = response['location']
+  			sleep 0.5 
+  			warn "redirected to #{@location}"
+  			fetch(@location, limit - 1)
+  		else
+  			puts 'did something else'
+  			response
+  		end
 		end
 	end
 
