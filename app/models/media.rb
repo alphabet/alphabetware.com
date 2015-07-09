@@ -31,8 +31,8 @@ class Media < ActiveRecord::Base
 	end
 
 	def cloudsight
-		Cloudsight.api_key = CONSUMER_KEY if Cloudsight.api_key.nil?
-#		Cloudsight.oauth_options = { consumer_key: CONSUMER_KEY, consumer_secret: CONSUMER_SECRET}
+#		Cloudsight.api_key = CONSUMER_KEY if Cloudsight.api_key.nil?
+		Cloudsight.oauth_options = { consumer_key: CONSUMER_KEY, consumer_secret: CONSUMER_SECRET} if Cloudsight.oauth_options.nil?
 #		Cloudsight.base_url = 'http://posttestserver.com/post.php'
 
 		#		File.open(@filename_path, 'wb') { |file| file.write( (fetch(self.base_url)))}
