@@ -40,8 +40,7 @@ class MessagesController < ApplicationController
 			@outgoing = Outgoing.new(to_phone: @incoming.from_phone, 
 															 body: (
 																  @incoming.medias.count > 0 ? 
-																 	"It looks like you have a #{@incoming.medias.first.description.titleize}." : "We did not receive your attachment. Did you send one?"
-																	),
+																 	"It looks like you have a #{@incoming.medias.first.description.titleize}." : "Hi! Using a mirror, take a picture of your phone and sms it back to me. Try and capture just the phone -- so a computer can recognize the image... and remember to turn of the flash."),
 															 to_country: @incoming.from_country,
 															 to_city: @incoming.from_city,
 															 to_zip: @incoming.to_zip
