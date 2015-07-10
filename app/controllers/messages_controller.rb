@@ -40,7 +40,7 @@ class MessagesController < ApplicationController
 			@outgoing = Outgoing.new(to_phone: @incoming.from_phone, 
 															 body: (
 																  @incoming.medias.count > 0 ? 
-																 	"Great, thanks! It looks like you have a #{@incoming.medias.first.description.titleize}. Who is your carrier?" : "Let's get started! Take a picture of your phone using a mirror. Try and capture just the phone -- so a computer can recognize the image, and remember to turn of the flash. Reply to this message with the picture."),
+																 	"Great, thanks! It looks like you have a #{@incoming.medias.first.description.titleize}. Who is your carrier?" : "Let's get started! Take a picture of your phone using a mirror. Try and capture just the phone -- so a computer can recognize the image, and remember to turn off the flash. Reply to this message with the picture."),
 															 to_country: @incoming.from_country,
 															 to_city: @incoming.from_city,
 															 to_zip: @incoming.to_zip
