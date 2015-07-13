@@ -40,7 +40,7 @@ class MessagesController < ApplicationController
 			@outgoing = Outgoing.new(to_phone: @incoming.from_phone, 
 															 body: (
 																  @incoming.medias.count > 0 ? 
-																 	"It looks like you have a #{@incoming.medias.first.description.titleize}." : "Try sending me a picture of any object."),
+																 	"It looks like you have a #{@incoming.medias.first.description.titleize}." : "Could you please take a picture of an object and send it to me?"),
 															 to_country: @incoming.from_country,
 															 to_city: @incoming.from_city,
 															 to_zip: @incoming.to_zip
