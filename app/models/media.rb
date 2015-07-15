@@ -58,7 +58,7 @@ class Media < ActiveRecord::Base
 				@location.nil? ? uri_str : @location 
   		when Net::HTTPRedirection then
   			@location = response['location']
-  			sleep 0.5 
+  			sleep 0.15 
   			warn "redirected to #{@location}"
   			fetch(@location, limit - 1)
   		else

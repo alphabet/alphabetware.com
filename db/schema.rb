@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150706153126) do
+ActiveRecord::Schema.define(version: 20150711014546) do
 
   create_table "medias", force: :cascade do |t|
     t.string   "message_id"
@@ -51,6 +51,11 @@ ActiveRecord::Schema.define(version: 20150706153126) do
     t.string   "media_url"
     t.string   "message_type"
     t.datetime "sent_at"
+    t.integer  "phone_id"
+  end
+
+  create_table "phones", force: :cascade do |t|
+    t.integer "phone_number", limit: 8
   end
 
 end
