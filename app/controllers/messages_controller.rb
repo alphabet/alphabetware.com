@@ -46,7 +46,7 @@ class MessagesController < ApplicationController
 															 to_zip: @incoming.to_zip
 															)
 			@outgoing.save!
-      render xml: @incoming, status: :created
+      render xml: "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response></Response>", status: :created
     else
       render xml: @incoming.errors, status: :unprocessable_entity
     end
