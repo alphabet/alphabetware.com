@@ -35,12 +35,31 @@ class MessagesController < ApplicationController
 		})
 		
 		@incoming.medias <<  Media.new(:parent_sid => @incoming.sms_sid, :media_url => @incoming.media_url) unless @incoming.media_url.nil? # should do for each params[:NumMedia]
-   
+
+    reg = Regexp.new(/[A-HJ-NPR-Z\d]{8}[\dX][A-HJ-NPR-Z\d]{2}\d{6}/, Regexp::IGNORECASE) # matches vins since 1980
+    vin = @incoming.body.scan(reg)
+
+	  if vin
+	      # now lets make an EDMUNDS api call
+	      # https://api.edmunds.com/api/vehicle/v2/vins/1B7MF3361XJ503719?fmt=json&api_key=s4qcbst9p2atathagmb8d379
+	      request = Typhoeus::Request.new(
+          "https://api.edmunds.com/api/vehicle/v2/vins/#{vin.first}",
+          method: :GET,
+          body: "this is a request body",
+          params: { fmt: "json", api_key: ENV['EDMUNDS_KEY'] },
+          headers: { Accept: "application/json" }
+        )
+        response = request.run
+        json = JSON.parse(response.body)
+        @body = "It looks like you have a #{json['years'][0]['year']} #{json['make']['name']} #{json['model']['name']} making #{json['engine']['horsepower']} horsepower."
+    else
+        @body = @incoming.medias.count > 0 ? 
+			 	"It looks like you have a #{@incoming.medias.first.description.titleize}." : "Could you please take a picture of an object and send it to me?"
+    end
+		  
 	 	if @incoming.save!
 			@outgoing = Outgoing.new(to_phone: @incoming.from_phone, 
-															 body: (
-																  @incoming.medias.count > 0 ? 
-																 	"It looks like you have a #{@incoming.medias.first.description.titleize}." : "Could you please take a picture of an object and send it to me?"),
+															 body: @body,
 															 to_country: @incoming.from_country,
 															 to_city: @incoming.from_city,
 															 to_zip: @incoming.to_zip

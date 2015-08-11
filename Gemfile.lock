@@ -1,9 +1,3 @@
-GIT
-  remote: git@github.com:cloudsight/cloudsight-ruby.git
-  revision: 93a6b0f77481467673eee670734b9ecba1d88274
-  specs:
-    cloudsight (0.0.1)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -48,6 +42,7 @@ GEM
     builder (3.2.2)
     byebug (5.0.0)
       columnize (= 0.9.0)
+    cloudsight (0.0.1)
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
@@ -70,7 +65,10 @@ GEM
     domain_name (0.5.24)
       unf (>= 0.0.5, < 1.0.0)
     erubis (2.7.0)
+    ethon (0.7.4)
+      ffi (>= 1.3.0)
     execjs (2.5.2)
+    ffi (1.9.10)
     gherkin (2.12.2)
       multi_json (~> 1.3)
     globalid (0.3.5)
@@ -189,6 +187,8 @@ GEM
       builder (>= 2.1.2)
       jwt (~> 1.0)
       multi_json (>= 1.3.0)
+    typhoeus (0.7.3)
+      ethon (>= 0.7.4)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (2.7.1)
@@ -208,7 +208,7 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
-  cloudsight!
+  cloudsight
   coffee-rails (~> 4.1.0)
   cucumber
   jbuilder (~> 2.0)
@@ -228,6 +228,7 @@ DEPENDENCIES
   sqlite3
   turbolinks
   twilio-ruby
+  typhoeus
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
 

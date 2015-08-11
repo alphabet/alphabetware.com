@@ -5,7 +5,6 @@ class Message < ActiveRecord::Base
 		%w(Incoming Outgoing)
 	end
 
-	validates :from_phone, presence: true
 	validates_with MessageValidator, fields: [:from_phone, :to_phone]
 
 end

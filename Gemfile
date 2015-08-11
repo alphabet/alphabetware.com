@@ -27,9 +27,11 @@ gem 'rails-api'
 #gem 'paperclip'
 #gem 'aws-sdk'
 gem 'puma'
-gem 'cloudsight', :git => 'git@github.com:cloudsight/cloudsight-ruby.git'  
+gem 'cloudsight'#, :git => 'git@github.com:cloudsight/cloudsight-ruby.git'  
 #gem 'cloudsight', :git => 'git://github.com/alphabet/cloudsight-ruby'
 gem 'rest-client'
+gem 'typhoeus'
+
 gem 'simple_oauth'
 
 group :production, :qa do
