@@ -33,9 +33,11 @@ class Media < ActiveRecord::Base
 	def cloudsight
 #		Cloudsight.api_key = CONSUMER_KEY if Cloudsight.api_key.nil?
 		Cloudsight.oauth_options = {}
+		logger.info "Cloudsight: OAUTH_OPTIONS #{Cloudsight.oauth_options}"
 		Cloudsight.oauth_options = { consumer_key: CONSUMER_KEY, consumer_secret: CONSUMER_SECRET} if Cloudsight.oauth_options === {} ||  Cloudsight.oauth_options.nil?
 #		Cloudsight.base_url = 'http://posttestserver.com/post.php'
 
+		logger.info "Cloudsight: OAUTH_OPTIONS==={} #{Cloudsight.oauth_options==={}}"
 		#		File.open(@filename_path, 'wb') { |file| file.write( (fetch(self.base_url)))}
 		request = Cloudsight::Request.send(locale: 'en-US', url: fetch(self.base_url))
 		Cloudsight::Response.retrieve(request['token']) do |response|
