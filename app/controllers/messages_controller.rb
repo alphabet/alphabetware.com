@@ -36,6 +36,10 @@ class MessagesController < ApplicationController
 		
 		@incoming.medias <<  Media.new(:parent_sid => @incoming.sms_sid, :media_url => @incoming.media_url) unless @incoming.media_url.nil? # should do for each params[:NumMedia]
 
+		  
+	 	if @incoming.save!
+		
+		
     reg = Regexp.new(/[A-HJ-NPR-Z\d]{8}[\dX][A-HJ-NPR-Z\d]{2}\d{6}/, Regexp::IGNORECASE) # matches vins since 1980
     vin = @incoming.body.scan(reg) # returns an empty array if not match
 
@@ -53,13 +57,14 @@ class MessagesController < ApplicationController
         json = JSON.parse(response.body)
         @body = "It looks like you have a #{json['years'][0]['year']} #{json['make']['name']} #{json['model']['name']} making #{json['engine']['horsepower']} horsepower."
     else
-				puts "this much media attachment: #{ordinalize(@incoming.medias.count)}"
-
-        @body = @incoming.medias.count > 0 ? 
+				puts "this much media attachment: #{@incoming.medias.length.to_s}"
+        if @body.nil?
+					@body = @incoming.medias.length > 0 ? 
 			 	"It looks like you have a #{@incoming.medias.first.description.titleize}." : "Could you please take a picture of an object and send it to me?"
-    end
-		  
-	 	if @incoming.save!
+				end
+		end
+		
+	# CREATE AN OUTGOING MESSAGE	
 			@outgoing = Outgoing.new(to_phone: @incoming.from_phone, 
 															 body: @body,
 															 to_country: @incoming.from_country,

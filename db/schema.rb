@@ -30,14 +30,13 @@ ActiveRecord::Schema.define(version: 20150711014546) do
   end
 
   create_table "messages", force: :cascade do |t|
-    t.integer  "to_phone",           limit: 11
-    t.integer  "from_phone",         limit: 11
+    t.integer  "to_phone",           limit: 8
+    t.integer  "from_phone",         limit: 8
     t.string   "body"
     t.string   "to_country"
     t.string   "to_state"
     t.string   "to_city"
     t.string   "to_zip"
-    t.string   "sms_message_sid"
     t.string   "num_media"
     t.string   "from_country"
     t.string   "from_state"
@@ -46,8 +45,8 @@ ActiveRecord::Schema.define(version: 20150711014546) do
     t.string   "sms_sid"
     t.string   "account_sid"
     t.string   "twilio_api_version"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.string   "media_url"
     t.string   "message_type"
     t.datetime "sent_at"
