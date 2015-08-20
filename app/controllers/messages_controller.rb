@@ -37,9 +37,9 @@ class MessagesController < ApplicationController
 		@incoming.medias <<  Media.new(:parent_sid => @incoming.sms_sid, :media_url => @incoming.media_url) unless @incoming.media_url.nil? # should do for each params[:NumMedia]
 
     reg = Regexp.new(/[A-HJ-NPR-Z\d]{8}[\dX][A-HJ-NPR-Z\d]{2}\d{6}/, Regexp::IGNORECASE) # matches vins since 1980
-    vin = @incoming.body.scan(reg)
+    vin = @incoming.body.scan(reg) # returns an empty array if not match
 
-	  if vin
+	  if vin.first
 	      # now lets make an EDMUNDS api call
 	      # https://api.edmunds.com/api/vehicle/v2/vins/1B7MF3361XJ503719?fmt=json&api_key=s4qcbst9p2atathagmb8d379
 	      request = Typhoeus::Request.new(
