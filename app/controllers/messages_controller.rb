@@ -53,6 +53,8 @@ class MessagesController < ApplicationController
         json = JSON.parse(response.body)
         @body = "It looks like you have a #{json['years'][0]['year']} #{json['make']['name']} #{json['model']['name']} making #{json['engine']['horsepower']} horsepower."
     else
+				puts "this much media attachment: #{ordinalize(@incoming.medias.count)}"
+
         @body = @incoming.medias.count > 0 ? 
 			 	"It looks like you have a #{@incoming.medias.first.description.titleize}." : "Could you please take a picture of an object and send it to me?"
     end
