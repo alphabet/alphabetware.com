@@ -37,6 +37,21 @@ class MessagesController < ApplicationController
 		@incoming.medias <<  Media.new(:parent_sid => @incoming.sms_sid, :media_url => @incoming.media_url) unless @incoming.media_url.nil? # should do for each params[:NumMedia]
 
 		if @incoming.save!
+
+		  # post message in slack
+		  slack_url = 'ENV['SLACK_WEBHOOK_URL']'
+		  slack_payload = {channel: "#general", username: "alohabet-incoming", text: @incoming.body,  icon_emoji: ":ghost:"}
+		  # post the message to slack
+		  slack = Typhoeus.post(slack_url, body: slack_payload.to_json)
+		  
+		  @incoming.medias.map do |media| # post the images and descriptions to slack as well
+        slack_payload = {channel: "#general", 
+          username: "alohabet-image", 
+          text: media.description.titleize, 
+          icon_emoji: ":octocat:"}
+  		  slack = Typhoeus.post(slack_url, body: slack_payload.to_json)		    
+	    end
+	    
 			reg = Regexp.new(/[A-HJ-NPR-Z\d]{8}[\dX][A-HJ-NPR-Z\d]{2}\d{6}/, Regexp::IGNORECASE) # matches vins since 1980
 			vin = @incoming.body.scan(reg) # returns an empty array if not match
 
@@ -52,6 +67,9 @@ class MessagesController < ApplicationController
 				)
 				response = request.run
 				json = JSON.parse(response.body)
+
+
+
 				@body = (response.success? ? "It looks like you have a #{json['years'][0]['year']} #{json['make']['name']} #{json['model']['name']} making #{json['engine']['horsepower']} horsepower." : "Unable to identify vin #{vin.first}")
 			else
 				puts "this much media attachment: #{@incoming.medias.length.to_s}"
@@ -69,6 +87,10 @@ class MessagesController < ApplicationController
 															 to_zip: @incoming.to_zip
 															)
 			@outgoing.save!
+			
+			slack_payload = {channel: "#general", username: "alohabet-outgoing", text: @outgoing.body,  icon_emoji: ":ghost:"}
+			slack = Typhoeus.post(slack_url, body: slack_payload.to_json)
+		  
 			render xml: "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response></Response>", status: :created
 		else
 			render xml: @incoming.errors, status: :unprocessable_entity
