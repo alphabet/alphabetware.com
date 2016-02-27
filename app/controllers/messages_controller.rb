@@ -37,10 +37,14 @@ class MessagesController < ApplicationController
 		@incoming.medias <<  Media.new(:parent_sid => @incoming.sms_sid, :media_url => @incoming.media_url) unless @incoming.media_url.nil? # should do for each params[:NumMedia]
 
 		if @incoming.save!
-
+		  
+      # TOKEN AUTH FOR CREATING CHANNELS: alohabet	gui.weinmann	ENV['SLACK_TOKEN']
+      # TODO: when a user posts a message, create a channel for that users SMS number
+      
+      
 		  # post message in slack
 		  slack_url = 'ENV['SLACK_WEBHOOK_URL']'
-		  slack_payload = {channel: "#general", username: "alohabet-incoming", text: @incoming.body,  icon_emoji: ":ghost:"}
+		  slack_payload = {channel: "#general", username: @incoming.from_phone + " - #{@incoming.from_city}", text: @incoming.body,  icon_emoji: ":ghost:"}
 		  # post the message to slack
 		  slack = Typhoeus.post(slack_url, body: slack_payload.to_json)
 		  
