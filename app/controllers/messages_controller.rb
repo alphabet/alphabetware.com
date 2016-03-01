@@ -51,7 +51,7 @@ class MessagesController < ApplicationController
 		  @incoming.medias.map do |media| # post the images and descriptions to slack as well
         slack_payload = {channel: "#general", 
           username: "alohabet-image", 
-          text: "<a href='#{media.media_url}'>#{media.description.titleize}</a>"
+          text: "<a href='#{media.media_url}'>#{media.description.titleize}</a>",
           icon_emoji: ":octocat:"}
   		  slack = Typhoeus.post(slack_url, body: slack_payload.to_json)		    
 	    end
