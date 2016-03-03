@@ -78,11 +78,11 @@ class MessagesController < ApplicationController
         puts "->>>>>>>>>>>>>>>>>>>>>> #{now}"
 
         availability1_start = (Time.new now.year, now.month, now.day, 14, 30, 0).in_time_zone # 9:30am
-        availability1_end = (Time.new now.year, now.month, now.day, 20, 45, 0).in_time_zone #4:45pm
+        availability1_end = (Time.new now.year, now.month, now.day, 22, 45, 0).in_time_zone #4:45pm
         puts "availability1 --> #{(availability1_start..availability1_end)}"
 
-        availability2_start = (Time.new now.year, now.month, now.day, 1, 59, 0).in_time_zone # 8:59pm
-        availability2_end =   (Time.new now.year, now.month, now.day, 4, 0, 0).in_time_zone  #11pm
+        availability2_start = (Time.new now.year, now.month, now.day, 1, 59, 0).in_time_zone + 86400 # 8:59pm
+        availability2_end =   (Time.new now.year, now.month, now.day, 4, 0, 0).in_time_zone  + 86400 #11pm
         puts "availability2 --> #{(availability2_start..availability2_end)}"
 
         available = (availability1_start..availability1_end).cover?(now) || (availability2_start..availability2_end).cover?(now)
