@@ -71,41 +71,41 @@ class MessagesController < ApplicationController
 				response = request.run
 				json = JSON.parse(response.body)
 
-#        Time.zone = 'Eastern Time (US & Canada)'
+				@body = (response.success? ? "It looks like you have a #{json['years'][0]['year']} #{json['make']['name']} #{json['model']['name']} making #{json['engine']['horsepower']} horsepower." : "Unable to identify vin #{vin.first}")
+			else
+
         now = Time.zone.now
         puts "->>>>>>>>>>>>>>>>>>>>>> #{now}"
-        
+
         availability1_start = (Time.new now.year, now.month, now.day, 14, 30, 0).in_time_zone # 9:30am
         availability1_end = (Time.new now.year, now.month, now.day, 20, 45, 0).in_time_zone #4:45pm
         puts "availability1 --> #{(availability1_start..availability1_end)}"
-        
+
         availability2_start = (Time.new now.year, now.month, now.day, 1, 59, 0).in_time_zone # 8:59pm
         availability2_end =   (Time.new now.year, now.month, now.day, 4, 0, 0).in_time_zone  #11pm
         puts "availability2 --> #{(availability2_start..availability2_end)}"
-        
+
         available = (availability1_start..availability1_end).cover?(now) || (availability2_start..availability2_end).cover?(now)
 
-				@body = (response.success? ? "It looks like you have a #{json['years'][0]['year']} #{json['make']['name']} #{json['model']['name']} making #{json['engine']['horsepower']} horsepower." : "Unable to identify vin #{vin.first}")
-			else
-				if @body.nil?
-					if @incoming.medias.length > 0
-						"It looks like you have a #{@incoming.medias.first.description.titleize}." 
-					else
-					  # core logic
-					  reg = Regexp.new(/\#\w+/) # match a hashtag
-        		@hashtag = @incoming.body.scan(reg)[0].to_s.slice!(0) # returns an empty array if not match
-        		# check if it's business hours!
-        		puts "--------> availabile: #{available}"
-				    
-					  if false #!(available)
-					    @body = "Sorry the "
-					    @body = "#{@body} #{@hashtag} " if @hashtag
-					    @body = @body + "concierge service is out partying. We're staffed by real people with lives! Please try between 9:30am and 4:45pm Eastern Standard Time."
-				    else
-				      @body = "One moment while we locate a concierge to answer your question"
-              @body = @body + " about #{@hashtag.pluralize}" if @hashtag
-				      # start parsing hash tags, connect to an aiml or slack
-			      end
+				if @body.nil? && @incoming.medias.length > 0
+						@body = "It looks like you have a #{@incoming.medias.first.description.titleize}." 
+				else
+				  # core logic
+				  reg = Regexp.new(/\#\w+/) # match a hashtag
+      		@hashtag = @incoming.body.scan(reg)[0].to_s.slice!(0) # returns an empty array if not match
+      		puts ">>>>>>>>>>>>>>>>> hashtag: #{@hashtag}"
+      		
+      		# check if it's business hours!
+      		puts "--------> availabile: #{available}"
+			    
+				  if !(available)
+				    @body = "Sorry the "
+				    @body = "#{@body} #{@hashtag} " if @hashtag
+				    @body = @body + "concierge service is out partying. We're staffed by real people with lives! Please try between 9:30am and 4:45pm Eastern Standard Time."
+			    else
+			      @body = "One moment while we locate a concierge to answer your question"
+            @body = @body + " about #{@hashtag.pluralize}" if @hashtag
+			      # start parsing hash tags, connect to an aiml or slack
 		      end
 				end
 			end
