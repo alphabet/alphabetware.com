@@ -41,7 +41,6 @@ class MessagesController < ApplicationController
       # TOKEN AUTH FOR CREATING CHANNELS: alohabet	gui.weinmann	ENV['SLACK_TOKEN']
       # TODO: when a user posts a message, create a channel for that users SMS number
       
-      
 		  # post message in slack
 		  slack_url = 'ENV['SLACK_WEBHOOK_URL']'
 		  slack_payload = {channel: "#general", username: @incoming.from_phone.to_s + " - #{@incoming.from_city}", text: @incoming.body,  icon_emoji: ":ghost:"}
@@ -72,14 +71,37 @@ class MessagesController < ApplicationController
 				response = request.run
 				json = JSON.parse(response.body)
 
-
+        Time.zone = 'Eastern Time (US & Canada)'
+        now = Time.zone.now
+        availability1_start = (Time.new now.year, now.month, now.day, 9, 0, 0) - now.utc_offset # 9:30am
+        availability1_end = (Time.new now.year, now.month, now.day, 16, 45, 0) - now.utc_offset #4:45pm
+        
+        availability2_start = (Time.new now.year, now.month, now.day, 20, 59, 0)  - now.utc_offset # 8:59pm
+        availability2_end =   (Time.new now.year, now.month, now.day, 23, 0, 0)  - now.utc_offset #11pm
+        available = (availability1_start..availability1_end).cover?(now) || (availability2_start..availability2_end).cover?(now)
 
 				@body = (response.success? ? "It looks like you have a #{json['years'][0]['year']} #{json['make']['name']} #{json['model']['name']} making #{json['engine']['horsepower']} horsepower." : "Unable to identify vin #{vin.first}")
 			else
-				puts "this much media attachment: #{@incoming.medias.length.to_s}"
 				if @body.nil?
-					@body = @incoming.medias.length > 0 ? 
-						"It looks like you have a #{@incoming.medias.first.description.titleize}." : "Could you please take a picture of an object and send it to me?"
+					if @incoming.medias.length > 0
+						"It looks like you have a #{@incoming.medias.first.description.titleize}." 
+					else
+					  # core logic
+					  reg = Regexp.new(/\#\w+/) # match a hashtag
+        		@hashtag = @incoming.body.scan(reg)[0].slice!(0) # returns an empty array if not match
+        		# check if it's business hours!
+        		puts "--------> availabile: #{available}"
+				    
+					  if !(available)
+					    @body = "Sorry the "
+					    @body = "#{@body} #{@hashtag} " if @hashtag
+					    @body = @body + "concierge service is out partying. We're staffed by real people with lives! Please try between 9:30am and 4:45pm Eastern Standard Time."
+				    else
+				      @body = "One moment while we locate a concierge to answer your question"
+              @body = @body + " about #{@hashtag.pluralize}" if @hashtag
+				      # start parsing hash tags, connect to an aiml or slack
+			      end
+		      end
 				end
 			end
 
