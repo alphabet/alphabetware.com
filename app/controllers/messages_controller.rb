@@ -104,8 +104,12 @@ class MessagesController < ApplicationController
 				    @body = @hashtag ? "#{@body} #{@hashtag.capitalize} " : "#{@body} Concierge"
 				    @body = @body + " team is out studying. We're staffed by real people with lives! Please try between 9:30am and 4:45pm Eastern Standard Time."
 			    else
-			      @body = "One moment while we locate a concierge to answer your question"
-            @body = @body + " about #{@hashtag.capitalize.pluralize}" if @hashtag
+			      
+            if @hashtag
+              @body = "One moment while we locate a concierge to answer your question about #{@hashtag.capitalize.pluralize}" 
+            else
+              @body = 'Try using a #hashtag to make your question more obvious. For example, if you\'d like help buying a dishwasher, use a #hashtag in front of the word #dishwasher so we know you want a dishwasher expert.'
+            end
 			      # start parsing hash tags, connect to an aiml or slack
 		      end
 				end
