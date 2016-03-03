@@ -101,7 +101,7 @@ class MessagesController < ApplicationController
 			    
 				  if !(available)
 				    @body = "Sorry the "
-				    @body = @hashtag ? "#{@body} #{@hashtag.capitalize} " : "Concierge"
+				    @body = @hashtag ? "#{@body} #{@hashtag.capitalize} " : "#{@body} Concierge"
 				    @body = @body + " team is out studying. We're staffed by real people with lives! Please try between 9:30am and 4:45pm Eastern Standard Time."
 			    else
 			      @body = "One moment while we locate a concierge to answer your question"
