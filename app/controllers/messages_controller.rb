@@ -101,11 +101,11 @@ class MessagesController < ApplicationController
 			    
 				  if !(available)
 				    @body = "Sorry the "
-				    @body = "#{@body} #{@hashtag} " if @hashtag
-				    @body = @body + "concierge service is out partying. We're staffed by real people with lives! Please try between 9:30am and 4:45pm Eastern Standard Time."
+				    @body = "#{@body} #{@hashtag.capitalize} " if @hashtag
+				    @body = @body + "concierge team is out studying. We're staffed by real people with lives! Please try between 9:30am and 4:45pm Eastern Standard Time."
 			    else
 			      @body = "One moment while we locate a concierge to answer your question"
-            @body = @body + " about #{@hashtag.pluralize}" if @hashtag
+            @body = @body + " about #{@hashtag.capitalize.pluralize}" if @hashtag
 			      # start parsing hash tags, connect to an aiml or slack
 		      end
 				end
