@@ -71,13 +71,18 @@ class MessagesController < ApplicationController
 				response = request.run
 				json = JSON.parse(response.body)
 
-        Time.zone = 'Eastern Time (US & Canada)'
+#        Time.zone = 'Eastern Time (US & Canada)'
         now = Time.zone.now
-        availability1_start = (Time.new now.year, now.month, now.day, 9, 0, 0) - now.utc_offset # 9:30am
-        availability1_end = (Time.new now.year, now.month, now.day, 16, 45, 0) - now.utc_offset #4:45pm
+        puts "->>>>>>>>>>>>>>>>>>>>>> #{now}"
         
-        availability2_start = (Time.new now.year, now.month, now.day, 20, 59, 0)  - now.utc_offset # 8:59pm
-        availability2_end =   (Time.new now.year, now.month, now.day, 23, 0, 0)  - now.utc_offset #11pm
+        availability1_start = (Time.new now.year, now.month, now.day, 14, 30, 0).in_time_zone # 9:30am
+        availability1_end = (Time.new now.year, now.month, now.day, 20, 45, 0).in_time_zone #4:45pm
+        puts "availability1 --> #{(availability1_start..availability1_end)}"
+        
+        availability2_start = (Time.new now.year, now.month, now.day, 1, 59, 0).in_time_zone # 8:59pm
+        availability2_end =   (Time.new now.year, now.month, now.day, 4, 0, 0).in_time_zone  #11pm
+        puts "availability2 --> #{(availability2_start..availability2_end)}"
+        
         available = (availability1_start..availability1_end).cover?(now) || (availability2_start..availability2_end).cover?(now)
 
 				@body = (response.success? ? "It looks like you have a #{json['years'][0]['year']} #{json['make']['name']} #{json['model']['name']} making #{json['engine']['horsepower']} horsepower." : "Unable to identify vin #{vin.first}")
@@ -92,7 +97,7 @@ class MessagesController < ApplicationController
         		# check if it's business hours!
         		puts "--------> availabile: #{available}"
 				    
-					  if !(available)
+					  if false #!(available)
 					    @body = "Sorry the "
 					    @body = "#{@body} #{@hashtag} " if @hashtag
 					    @body = @body + "concierge service is out partying. We're staffed by real people with lives! Please try between 9:30am and 4:45pm Eastern Standard Time."
