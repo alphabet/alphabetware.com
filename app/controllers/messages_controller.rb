@@ -88,7 +88,7 @@ class MessagesController < ApplicationController
 					else
 					  # core logic
 					  reg = Regexp.new(/\#\w+/) # match a hashtag
-        		@hashtag = @incoming.body.scan(reg)[0].slice!(0) # returns an empty array if not match
+        		@hashtag = @incoming.body.scan(reg)[0].to_s.slice!(0) # returns an empty array if not match
         		# check if it's business hours!
         		puts "--------> availabile: #{available}"
 				    
