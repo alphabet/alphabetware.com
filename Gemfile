@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.2.2'
+ruby '2.3.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5.1'
@@ -33,6 +33,7 @@ gem 'rest-client'
 gem 'typhoeus'
 
 gem 'simple_oauth'
+gem 'activeadmin', github: 'activeadmin'
 
 group :production, :qa do
 	gem 'rails_12factor' # this is for heroku
