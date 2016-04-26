@@ -1,28 +1,417 @@
 
 <html>
 <head>
+<LINK href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<style>
+body, html {
+    width: 100%;
+    height: 140%;
+}
+body {
+    background-color: #f8f8f8;
+}
+
+body, h1, h2, h3, h4, h5, h6 {
+    font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 600;
+}
+
+nav.topnav {
+    border-bottom: 1px solid #ddd;
+}
+
+.topnav {
+    font-size: 13px; 
+	background-color: #e8e8e8;
+	border: none;
+}
+.topnav div.vnav a {
+    color: #333333;
+}
+#logo {
+	font-size: 1.20em;
+	padding: 6px 12px;
+	border: 0px solid #ddd;
+	border-radius: 4px;
+	color: #333333;
+	background-color: rgba(0,0,0,0.0);
+}
+
+div.section_gray {
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+div.section_white {
+    padding-top: 70px;
+    padding-bottom: 70px;
+    background-color: white;
+}
+
+div.section_header {
+    margin-bottom: 30px;
+}
+
+div.bar {
+    height: 4px;
+    width: 100%;
+    margin: 0px auto;
+    background-color: #ddd;
+}
+
+.intro-header {
+    padding-top: 60px; 
+    padding-bottom: 70px;
+    text-align: center;
+    color: #333;
+    border: 0px solid yellow;
+}
+
+.intro-message {
+    position: relative;
+    padding-top: 90px;
+    padding-bottom: 16px;
+}
+
+.intro-message > h1 {
+    margin: 0;
+    /* text-shadow: 2px 2px 3px rgba(0,0,0,0.6); */
+    font-size: 3em;
+}
+
+.intro-message h1 span a{
+    font-size: 0.3em;
+    text-decoration: underline;
+    color: #333;
+}
+
+div.about p {
+    font-size: 16px;
+    line-height: 28px;
+}
+
+div.about p a {
+    color: #333;
+    text-decoration: underline;
+}
+
+@media(max-width:767px) {
+    .intro-message {
+        padding-bottom: 15%;
+    }
+
+    .intro-message > h1 {
+        font-size: 3em;
+    }
+}
+
+p.copyright {
+    margin: 15px 0 0;
+}
+
+div.the_actions {
+    padding-top: 20px;
+    padding-bottom: 60px;
+}
+
+div.the_actions > div.container > div.row {
+    padding-top: 20px;
+    border-radius: 8px;
+}
+
+span.next_arrow {
+    display: none;
+    position: absolute;
+    right: -10px;
+    top: 130px;
+    font-size: 2.2em;
+}
+
+div.col-md-4 div.action_item {
+    border: 0px solid gray;
+    border-radius: 4px;
+    margin: 1px 27px;
+    padding: 6px;
+}
+
+div.action_spot {
+    border: 0px solid gray;
+    padding: 20px 30px;
+    height: 280px;
+}
+
+div.action_spot div.add_email {
+    padding-top: 36px;
+}
+
+label.upload_file {
+    cursor: pointer;
+    margin-top: 30px;
+    border: 1px solid #777;
+    border-radius: 3px;
+    background-color: #ddd;
+    padding: 4px 8px;
+}
+
+div.action_item a {
+    text-decoration: underline;
+    font-size: 0.9em;
+}
+
+div.col-md-4 div.demo_header {
+    text-align:center;
+    margin-bottom: 32px;
+}
+
+div.question_holder {
+    margin-bottom: 36px;
+}
+div.question_holder h3 {
+    font-size: 1.5em;
+}
+div.question_holder p {
+    max-width: 420px;
+}
+
+div.question {
+    cursor: pointer;
+    padding-bottom: 8px;
+}
+
+div.answer_holder {
+    padding-left: 16px;
+    height: 300px;
+    overflow-y:scroll;
+    position:relative;
+}
+
+div.answer {
+    margin-bottom: 46px;
+}
+
+div.answer div.answer_header {
+    font-size: 14px;
+    text-decoration: underline;
+    margin-bottom: 6px;
+}
+
+div.pricing_holder {
+    text-align: center;
+}
+
+table.pricing_table td {
+    border: 2px solid #aaa;
+    font-size: 16px;
+}
+
+table.pricing_table tr {
+    height: 90px;
+}
+table.pricing_table td {
+    width: 200px;
+    padding: 6px;
+}
+table.pricing_table tr.header_row {
+    background-color: #3764CC;
+    color: #f8f8f8;
+}
+table.pricing_table td.header_col {
+    background-color: #37A8CC;
+    color: #f8f8f8;
+}
+</style>
 <title>Aloha!</title>
 <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
 </head>
 <body>
-<h1>Aloha!</h1>
-<p>This is a FREE robot/concierge proof-of-concept for ecommerce. It can help your business engage in one-on-one conversations with new customers and reach customers where they are!
-<h2>To try it, Send
-<li>The VIN number for any car, we'll do a bit of FREE research for you.
-<li>A #hashtag for a category of things you want help with, i.e., #beer
-<li>A photo of a thing you want. We'll help you 
-  <br/>&nbsp;&nbsp;&nbsp;- Compare it against the other choices
-  <br/>&nbsp;&nbsp;&nbsp;- Pick out the best one
-  <br/>&nbsp;&nbsp;&nbsp;- Find the best place to buy it
-</h2>
-Send your request via text message to <script>document.writeln('64' + '<!-- abcedfg -->' + '6-23' + '<!-- no bots -->' + '3-4264');</script> or fill in the box below and hit submit.
-<br/><textarea rows=6 cols=80 maxlength=140></textarea>
-<br/>
-<input type=button value="submit" onclick="javascript:this.value='web based submit doesn\'t work yet. Try sending a text message';">
-<br/><span id='mssg'>Note, web based submit doesn't work yet, try sending a text message</span>
-<br/><br/>optional
-<br/><input type=file>
+	<nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+	        <div class="container topnav">
+	            <div class="navbar-header vnav">
+	                <a class="navbar-brand topnav" href="#"><span id="logo">Alohabet!&trade; Concierge Service</span></a>
+	            </div>
+	            <div class="collapse navbar-collapse vnav" id="bs-example-navbar-collapse-1">
+	                <ul class="nav navbar-nav navbar-right">
+	                    <li><a href="" class="scroll_to" dest="#faq">FAQ</a></li>
+	                    <li><a href="sms:ENV['TWILIO_FROM_NUMBER']">(646) 233-9264</a></li>
+	                </ul>
+	            </div><!-- /.navbar-collapse -->
+	        </div><!-- /.container -->
+	    </nav>
+	
+		<!-- Header -->
+			<span id="about"></span>
+		    <div class="section_gray">
+		        <div class="intro-header">
+		            <div class="container">
 
+		                <div class="row">
+		                    <div class="col-lg-12">
+		                        <div class="intro-message">
+		                            <h1 class="description">The concierge solution for Ecommerce.</h1>
+		                            <a href="sms:ENV['TWILIO_FROM_NUMBER']"><h1 class="description" style="color:#326CC0;">(646) 233-4264</h1></a>
+		                        </div>
+		                    </div>
+		                </div>
+
+		            </div>
+		            <!-- /.container -->
+
+		        </div><!-- /.intro-header -->
+
+		    </div> <!-- .section_gray -->
+
+
+			<div class="bar"></div>
+
+				<span id="demo"></span>
+			    <div class="section_white">
+			        <div class="container" style="padding-bottom:60px;">
+
+			            <div class="row">
+			                <div class="col-md-12">
+
+			                    <div style="text-align:center;margin-bottom:60px;">
+			                        <h2>Benefits of Alohabet&trade; robot assisted SMS concierge</h2>
+			                    </div>
+
+			                    <div class="row" style="text-align:center;">
+			                        <div class="col-md-4">
+			                            <h3>
+			                                Engage customers in one-on-one conversations
+			                            </h3>
+			                            <br />
+			                            <h4><i> </i></h4>
+			                        </div>
+			                        <div class="col-md-4">
+			                            <h3>
+			                                Simple Ecommerce, via text message 
+			                            </h3>
+			                            <br />
+			                            <h4><i> </i></h4>
+			                        </div>
+			                        <div class="col-md-4">
+			                            <h3>
+			                               Reach customers using a familiar interface
+			                            </h3>
+			                            <br />
+			                            <h4><i></i></h4>
+			                        </div>
+			                    </div> <!-- .row -->
+			
+			                </div> <!-- .col-md-12 -->
+			            </div> <!-- .row -->
+			        </div> <!-- .container -->
+			    </div> <!-- .section_white -->
+
+				<div class="bar"></div>
+
+
+			    <div class="section_white">
+			        <div class="container" style="padding-bottom:60px;">
+
+
+			             <div class="row">
+
+		                        <div class="col-md-12" style="text-align:center;">
+									<h4>
+									Try a robot concierge today. 
+									<br/><br/>Text an automobile VIN number to <a href="sms:ENV['TWILIO_FROM_NUMBER']">(646) 233-4264</a>
+									<br/><br/>Snap a random photo of a product and send it to <a href="sms:ENV['TWILIO_FROM_NUMBER']">(646) 233-4264</a>
+									</h4>
+								</div>
+						</div>
+
+					</div>
+				</div>
+
+
+
+				<div class="bar"></div>
+					<span id="faq"></span>
+				    <div class="section_white">
+				        <div class="container">
+
+				            <div class="row about">
+				                <div class="col-md-12">
+				                    <div class="section_header">
+				                        <h2>FAQ</h2>
+				                    </div>
+				                </div>
+				            </div> <!-- .row -->
+
+				            <div class="row">
+				                <div class="col-md-1"></div>
+				                <div class="col-md-10">
+				                    <div class="question_holder">
+				                        <div><h3>What is Alohabet Concierge?</h3></div>
+				                        <div><p style="margin-left:50px;">
+										Alohabet is an easy way to engage with customers, using a familiar SMS platform. 
+										</div>
+				                    </div>
+									
+									<div class="question_holder">
+				                        <div><h3>Why SMS?</h3></div>
+				                        <div><p style="margin-left:50px;">
+											Two-thirds of Americans are now smartphone owners.
+											<br/>Text messaging is the most widely-used smartphone feature.
+											<br/>97% of smartphone owners use text messaging!
+											
+											<br/><i>source:</i> 
+											<a href='http://www.pewinternet.org/2015/04/01/us-smartphone-use-in-2015/'>Pew 
+												Research Center - U.S. Smartphone Use in 2015.</a>
+										</div>
+				                    </div>
+
+				                    <div class="question_holder">
+				                        <div><h3>Do standard text messaging and data rates apply?</h3></div>
+				                        <div><p style="margin-left:50px;">Yes.</p></div>
+				                    </div>
+				                    <div class="question_holder">
+				                        <div><h3>I have another question.</h3></div>
+				                        <div><p style="margin-left:50px;">Great! Shoot us a text message. We'll respond if we're not busy.</p></div>
+				                    </div>
+
+				                </div>
+				                <div class="col-md-1"></div>
+				            </div> <!-- .row -->
+
+
+				        </div> <!-- .container -->
+				    </div> <!-- .section_white -->
+		
+					
+<P>
+	production: <a href="https://slack.com/oauth/authorize?scope=incoming-webhook,commands&client_id=23358432194.31483469525"><img alt="Add to Slack" height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png" srcset="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x" /></a>
+	<br/>
+	localhost: <a href="https://slack.com/oauth/authorize?scope=incoming-webhook,commands&client_id=23358432194.32010111910"><img alt="Add to Slack" height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png" srcset="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x" /></a>
+	
+<script>
+
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-946276-11', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+<script>
+
+function track(p) {
+	console.log ('tracking');
+	ga('send', {
+	  hitType: 'event',
+	  eventCategory: 'click',
+	  eventAction: 'submit',
+	  eventLabel: 'not-working-yet',
+	  eventValue: document.getElementById('userText').value
+	});
+	return true;
+}
+</script>
 </body>
 </html>
 
