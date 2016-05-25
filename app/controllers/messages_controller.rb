@@ -73,7 +73,7 @@ class MessagesController < ApplicationController
 				json = JSON.parse(response.body)
 
 				begin
-          @body = (response.success? ? "It looks like you have a #{json['years'][0]['year']} #{json['make']['name']} #{json['model']['name']} making #{ json['engine'] ? json['engine']['horsepower'] + ' horsepower' : json['MPG']['highway'] + 'mpg on the highway'}." : "Unable to identify vin #{vin.first}")
+          @body = (response.success? ? "It looks like you have a #{json['years'][0]['year']} #{json['make']['name']} #{json['model']['name']} making #{ json['engine'] ? json['engine']['horsepower'].to_s + ' horsepower' : json['MPG']['highway'] + 'mpg on the highway'}." : "Unable to identify vin #{vin.first}")
         rescue
           @body = "Sorry, the VIN #{vin} could not be parsed."
         end
