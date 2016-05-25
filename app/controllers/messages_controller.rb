@@ -55,7 +55,8 @@ class MessagesController < ApplicationController
   		  slack = Typhoeus.post(slack_url, body: slack_payload.to_json)		    
 	    end
 	    
-			reg = Regexp.new(/[A-HJ-NPR-Z\d]{8}[\dX][A-HJ-NPR-Z\d]{2}\d{6}/, Regexp::IGNORECASE) # matches vins since 1980
+			# reg = Regexp.new(/[A-HJ-NPR-Z\d]{8}[\dX][A-HJ-NPR-Z\d]{2}\d{6}/, Regexp::IGNORECASE) # matches vins since 1980
+			reg = Regexp.new(/^[^iIoOqQ'-]{10,17}$/) # more optimistic regex
 			vin = @incoming.body.scan(reg) # returns an empty array if not match
 
 			if vin.first
