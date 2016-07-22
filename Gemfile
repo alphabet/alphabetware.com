@@ -33,7 +33,7 @@ gem 'rest-client'
 gem 'typhoeus'
 
 gem 'simple_oauth'
-gem 'activeadmin', github: 'activeadmin'
+gem 'omniauth-slack'
 
 group :production, :qa do
 	gem 'rails_12factor' # this is for heroku
