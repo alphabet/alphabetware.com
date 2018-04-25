@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <title>KML Layers</title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 12,
+          center: {lat: 41.021, lng: -73.867}
+        });
+
+        var ctaLayer = new google.maps.KmlLayer({
+          url: 'https://gist.githubusercontent.com/alphabet/cf965570154596d6076fde3c70e8b04a/raw/fd525c3f07329810b206da342e3b95d299828a93/walking_routes.kml',
+          map: map
+        });
+        console.log('init map');
+        ctaLayer;
+        
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0tvyECrM_Xdir-PMrv4uqIV2NYTS3s3E&callback=initMap">
+    </script>
+  </body>
+</html>
