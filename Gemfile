@@ -23,7 +23,6 @@ gem 'sdoc' #, '~> 0.4.0', group: :doc
 
 # sms library
 gem 'twilio-ruby'
-gem 'rails-api'
 #gem 'paperclip'
 #gem 'aws-sdk'
 gem 'puma'
