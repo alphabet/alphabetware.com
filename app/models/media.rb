@@ -1,7 +1,7 @@
 class Media < ActiveRecord::Base
 	validates :description, presence: true
 	belongs_to :incoming, :foreign_key => 'message_id'
-	before_validation :identification_complete, if: "newly_described?"
+	before_validation :identification_complete, if: -> { newly_described? }
 	before_save :described_at_timestamp
 
 	def described_at_timestamp
