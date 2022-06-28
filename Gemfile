@@ -37,6 +37,8 @@ group :production, :qa do
 	gem 'newrelic_rpm' # this is for new_relic
 	gem 'pg'
 	gem 'net-smtp', require: false
+	gem 'net-pop', require: false
+	gem 'net-imap', require: false
 end
 
 # Use ActiveModel has_secure_password
