@@ -92,15 +92,20 @@ class MessagesController < ApplicationController
 
         available = (availability1_start..availability1_end).cover?(now) || (availability2_start..availability2_end).cover?(now)
 
+        puts ">>>>>>>>>>>>>>>> incoming body: #{@incoming.body}"
+
 				if @body.nil? && @incoming.medias.length > 0
 						@body = "It looks like you have a #{@incoming.medias.first.description.titleize}." 
 				else
 				  # core logic
 				  reg = Regexp.new(/\#\w+/) # match a hashtag
+
       		@hashtag = @incoming.body.scan(reg)[0]
+      		puts ">>>>>>>>>>>>>>>>> incoming hashtag: #{@hashtag}"
+
       		@hashtag.to_s.slice!(0) # returns an empty array if not match
-      		puts ">>>>>>>>>>>>>>>>> hashtag: #{@hashtag}"
-      		
+      		puts ">>>>>>>>>>>>>>>>> sliced hashtag: #{@hashtag}"
+
       		# check if it's business hours!
       		puts "--------> availabile: #{available}"
 			    
