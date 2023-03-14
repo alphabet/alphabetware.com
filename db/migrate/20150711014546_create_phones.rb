@@ -1,4 +1,4 @@
-class CreatePhones < ActiveRecord::Migration
+class CreatePhones < ActiveRecord::Migration[6.1]
   def up
 	  add_column :messages, :phone_id, :integer	
     create_table :phones do |t|

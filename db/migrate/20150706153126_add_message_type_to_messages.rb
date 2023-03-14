@@ -1,4 +1,4 @@
-class AddMessageTypeToMessages < ActiveRecord::Migration
+class AddMessageTypeToMessages < ActiveRecord::Migration[6.1]
   def down 
     remove_column :messages, :message_type
     remove_column :messages, :sent_at

@@ -1,4 +1,4 @@
-class CreateMedias < ActiveRecord::Migration
+class CreateMedias < ActiveRecord::Migration[6.1]
   def change
     create_table :medias do |t|
 			t.string :message_id
