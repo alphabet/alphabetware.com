@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root 'pages#index'
+  
   resources :media, except: [:new, :edit]
   resources :messages, except: [:new, :edit]
   # The priority is based upon order of creation: first created -> highest priority.

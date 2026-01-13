@@ -1,255 +1,12 @@
-
 <html>
 <head>
-<LINK href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="styles.css" rel="stylesheet" type="text/css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<style>
-body, html {
-    width: 100%;
-    height: 140%;
-}
-body {
-    background-color: #f8f8f8;
-}
-
-body, h1, h2, h3, h4, h5, h6 {
-    font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-weight: 600;
-}
-
-nav.topnav {
-    border-bottom: 1px solid #ddd;
-}
-
-.topnav {
-    font-size: 13px; 
-	background-color: #e8e8e8;
-	border: none;
-}
-.topnav div.vnav a {
-    color: #333333;
-}
-#logo {
-	font-size: 1.20em;
-	padding: 6px 12px;
-	border: 0px solid #ddd;
-	border-radius: 4px;
-	color: #333333;
-	background-color: rgba(0,0,0,0.0);
-}
-
-div.section_gray {
-    padding-top: 60px;
-    padding-bottom: 60px;
-}
-
-div.section_white {
-    padding-top: 70px;
-    padding-bottom: 70px;
-    background-color: white;
-}
-
-div.section_header {
-    margin-bottom: 30px;
-}
-
-div.bar {
-    height: 4px;
-    width: 100%;
-    margin: 0px auto;
-    background-color: #ddd;
-}
-
-.intro-header {
-    padding-top: 60px; 
-    padding-bottom: 70px;
-    text-align: center;
-    color: #333;
-    border: 0px solid yellow;
-}
-
-.intro-message {
-    position: relative;
-    padding-top: 90px;
-    padding-bottom: 16px;
-}
-
-.intro-message > h1 {
-    margin: 0;
-    /* text-shadow: 2px 2px 3px rgba(0,0,0,0.6); */
-    font-size: 3em;
-}
-
-.intro-message h1 span a{
-    font-size: 0.3em;
-    text-decoration: underline;
-    color: #333;
-}
-
-div.about p {
-    font-size: 16px;
-    line-height: 28px;
-}
-
-div.about p a {
-    color: #333;
-    text-decoration: underline;
-}
-
-@media(max-width:767px) {
-    .intro-message {
-        padding-bottom: 15%;
-    }
-
-    .intro-message > h1 {
-        font-size: 3em;
-    }
-}
-
-p.copyright {
-    margin: 15px 0 0;
-}
-
-div.the_actions {
-    padding-top: 20px;
-    padding-bottom: 60px;
-}
-
-div.the_actions > div.container > div.row {
-    padding-top: 20px;
-    border-radius: 8px;
-}
-
-span.next_arrow {
-    display: none;
-    position: absolute;
-    right: -10px;
-    top: 130px;
-    font-size: 2.2em;
-}
-
-div.col-md-4 div.action_item {
-    border: 0px solid gray;
-    border-radius: 4px;
-    margin: 1px 27px;
-    padding: 6px;
-}
-
-div.action_spot {
-    border: 0px solid gray;
-    padding: 20px 30px;
-    height: 280px;
-}
-
-div.action_spot div.add_email {
-    padding-top: 36px;
-}
-
-label.upload_file {
-    cursor: pointer;
-    margin-top: 30px;
-    border: 1px solid #777;
-    border-radius: 3px;
-    background-color: #ddd;
-    padding: 4px 8px;
-}
-
-div.action_item a {
-    text-decoration: underline;
-    font-size: 0.9em;
-}
-
-div.col-md-4 div.demo_header {
-    text-align:center;
-    margin-bottom: 32px;
-}
-
-div.question_holder {
-    margin-bottom: 36px;
-}
-div.question_holder h3 {
-    font-size: 1.5em;
-}
-div.question_holder p {
-    max-width: 420px;
-}
-
-div.question {
-    cursor: pointer;
-    padding-bottom: 8px;
-}
-
-div.answer_holder {
-    padding-left: 16px;
-    height: 300px;
-    overflow-y:scroll;
-    position:relative;
-}
-
-div.answer {
-    margin-bottom: 46px;
-}
-
-div.answer div.answer_header {
-    font-size: 14px;
-    text-decoration: underline;
-    margin-bottom: 6px;
-}
-
-div.pricing_holder {
-    text-align: center;
-}
-
-table.pricing_table td {
-    border: 2px solid #aaa;
-    font-size: 16px;
-}
-
-table.pricing_table tr {
-    height: 90px;
-}
-table.pricing_table td {
-    width: 200px;
-    padding: 6px;
-}
-table.pricing_table tr.header_row {
-    background-color: #3764CC;
-    color: #f8f8f8;
-}
-table.pricing_table td.header_col {
-    background-color: #37A8CC;
-    color: #f8f8f8;
-}
-</style>
 <title>Aloha!</title>
 <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
-<!-- Start of Async Drift Code -->
-<script>
-!function() {
-  var t;
-  if (t = window.driftt = window.drift = window.driftt || [], !t.init) return t.invoked ? void (window.console && console.error && console.error("Drift snippet included twice.")) : (t.invoked = !0, 
-      t.methods = [ "identify", "config", "track", "reset", "debug", "show", "ping", "page", "hide", "off", "on" ], 
-      t.factory = function(e) {
-      return function() {
-      var n;
-      return n = Array.prototype.slice.call(arguments), n.unshift(e), t.push(n), t;
-      };
-      }, t.methods.forEach(function(e) {
-        t[e] = t.factory(e);
-        }), t.load = function(t) {
-      var e, n, o, i;
-      e = 3e5, i = Math.ceil(new Date() / e) * e, o = document.createElement("script"), 
-      o.type = "text/javascript", o.async = !0, o.crossorigin = "anonymous", o.src = "https://js.driftt.com/include/" + i + "/" + t + ".js", 
-      n = document.getElementsByTagName("script")[0], n.parentNode.insertBefore(o, n);
-      });
-}();
-drift.SNIPPET_VERSION = '0.3.1';
-drift.load('u7dzsnrpe6nc');
-</script>
-<!-- End of Async Drift Code -->
 </head>
 <body>
-	<nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+    	<!--nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
 	        <div class="container topnav">
 	            <div class="navbar-header vnav">
 	                <a class="navbar-brand topnav" href="#"><span id="logo">Alohabet!&trade; Concierge Service</span></a>
@@ -259,162 +16,197 @@ drift.load('u7dzsnrpe6nc');
 	                    <li><a href="#faq" class="scroll_to" dest="#faq">FAQ</a></li>
 	                    <li><a href="sms:ENV['TWILIO_FROM_NUMBER']">(646) 233-4264</a></li>
 	                </ul>
-	            </div><!-- /.navbar-collapse -->
-	        </div><!-- /.container -->
-	    </nav>
-	
-		<!-- Header -->
-			<span id="about"></span>
-		    <div class="section_gray">
-		        <div class="intro-header">
-		            <div class="container">
+	            </div>
+	        </div>
+	    </nav-->
 
-		                <div class="row">
-		                    <div class="col-lg-12">
-		                        <div class="intro-message">
-		                            <h1 class="description">The concierge solution for Ecommerce.</h1>
-		                            <a href="sms:ENV['TWILIO_FROM_NUMBER']"><h1 class="description" style="color:#326CC0;">(646) 233-4264</h1></a>
-		                        </div>
-		                    </div>
-		                </div>
-
-		            </div>
-		            <!-- /.container -->
-
-		        </div><!-- /.intro-header -->
-
-		    </div> <!-- .section_gray -->
-
-
-			<div class="bar"></div>
 
 				<span id="demo"></span>
-			    <div class="section_white">
-			        <div class="container" style="padding-bottom:60px;">
+			<div class="cover" aria-label="A Chatty Grey Squirrel. By Gui Weinmann. Grey Squirrels are common the wild. Good luck catching one!">
+				<div class="cover__description">
+					<h4 class="description">Guillermo Weinmann</h4>
+				</div>
+			</div>
 
-			            <div class="row">
-			                <div class="col-md-12">
-
-			                    <div style="text-align:center;margin-bottom:60px;">
-			                        <h2>Benefits of Alohabet&trade; robot assisted SMS concierge</h2>
-			                    </div>
-
-			                    <div class="row" style="text-align:center;">
-			                        <div class="col-md-4">
-			                            <h3>
-			                                Engage customers in one-on-one conversations
-			                            </h3>
-			                            <br />
-			                            <h4><i> </i></h4>
-			                        </div>
-			                        <div class="col-md-4">
-			                            <h3>
-			                                Simple Ecommerce, via text message 
-			                            </h3>
-			                            <br />
-			                            <h4><i> </i></h4>
-			                        </div>
-			                        <div class="col-md-4">
-			                            <h3>
-			                               Reach customers using a familiar interface
-			                            </h3>
-			                            <br />
-			                            <h4><i></i></h4>
-			                        </div>
-			                    </div> <!-- .row -->
-			
-			                </div> <!-- .col-md-12 -->
-			            </div> <!-- .row -->
-			        </div> <!-- .container -->
-			    </div> <!-- .section_white -->
-
-				<div class="bar"></div>
+			<div class="section_gray">
+				<div class="intro-message">
+					<h1>Builder<br/>and<br/>Thinker</h1>
+					<br/><br/>
+					<span class="text-white not-a-squirrel" 
+					alt="ceci n'est pas un squirrel">this is not a squirrel</span>
+				</div>
+			</div>
 
 
 			    <div class="section_white">
-			        <div class="container" style="padding-bottom:60px;">
+					<div class="section_white--column_right">Current Area of Interest : 
+						I am interested in user generated content and intellectual property rights.
+						<p>On today's UGC platforms, users are credited for comments, 
+						photos, product reviews, etc. Corporations are the ones who profit from user contributions, 
+						indefinitely, providing almost zero compensation to their users. 
+						And corporations aren't on the hook for governance and free speech.
+						Social networks go so far to beg/ask/incentivize users to monitor their platforms for fraud
+						by flagging content and bots.
+						<P>This benevolent kind of self-contained system 
+							worked in the good old days. Today things are different. 
+							There's a plague of bad actors, and things are getting worse fast with
+							 generative AI and bots.
+						</P>
+						 <P>Would the network effect be achievable without destruction of IP rights in a liberated system?
+						</P>
+						<p>
+						 Would social networks differ if users had full and perpetual rights to 
+						 control their own data? Today's tangled process is one where companies 
+						 must comply with laws to grant users the right to be forgotten. Both sides must 
+						 jump through legal and technical challenges to achieve this, generally lacking 
+						 fine-grained embedded controls, in order to comply with the laws as they are written.
+						</p>
+						<P>
+						 Fast Forward. In 2026, it seems like it should be possible for users to manage their own data
+						  through technology. Technology that can provide both
+						  portability and dual-sided accountability when it comes to UGC and PII.
+						</P>
+						<P>
+						 I've been trying to understand if businesses and individuals can both be 
+						 assured that submitted data 
+						 is real without having to expend capital on fraud detection. 
+						 </P>
+						 <p>
+							New technology could make it easier 
+						 	and cheaper to distinguish real people from bots and fake accounts.
+							 <br/><br/>
+						 For now, I am calling it "Anonymous Verified Users". By leveraging aspects of 
+						 the <a href="https://www.w3.org/TR/did-1.1/">DID spec</a>, 
+						 a blockchain ledger, zero knowledge proofs, and other technology to 
+						 1. reduce the cost of fraud detection, 
+						 2. provide fine-grain control over UGC, and 
+						 3. allow corporations to analyze user data without exposing user data. 
+						</P>
+						<P>Anonymous Verified Users
+							<ol>We should be able to
+							<li>Share data</li>
+							<li>Define how long we want to grant data access</li>
+							<li>Retain ownership of our data</li>
+							<li>Sign our data, in a way that is anonymous and unforgeable</li>
+							</ol>
+						<P>AVU data consumers are entites with rights too.
+							<ol>They can
+								<li>Have proof that data is REAL, not a bot, nor a forgery</li>
+								<li>Perform computations on the data, without seeing the raw data</li>
+							</ol>
 
-
-			             <div class="row">
-
-		                        <div class="col-md-12" style="text-align:center;">
-									<h4>
-									Try a robot concierge today. 
-									<br/><br/>Text an automobile VIN number to <a href="sms:ENV['TWILIO_FROM_NUMBER']">(646) 233-4264</a>. Our system will tell you something useful about the car.
-									<br/><br/>Snap a photo of an object and text it to <a href="sms:ENV['TWILIO_FROM_NUMBER']">(646) 233-4264</a>. Our system will figure out the object.
-									</h4>
-								</div>
-						</div>
-
+						</P>	
+						Currently, this system sounds and looks good, but one problem is that anyone with
+			            access to the data can copy the data in place to de-associate the owner from their data.
+						The only defence is that if a bad actor copies data, they lose the provenance. 
+						But Fully Homomorphic Encryption (FHE) and ZKP can lock down the gap.
+						</P>
 					</div>
+					<div class="section_white--column_left">image here</div>
+				</div>
+				<div class="section_white">
+					<div class="section_white--column_right">Perhaps insert a presidio demo here</div>
+					<div class="section_white--column_left">image here</div>
+					
+				</div>
+
+        Some projects that I am proud of:
+        Upkept
+        Broadbandtogether
+        Nationbuilder
+        Crowdsignal
+
+
+				<!-- broadbandtogether: I worked on a company initiative to fix broadband. 
+				We embarked on a campaign to collect real invoices from users, and captured over 50,000.
+				as well as real data on user's broadband speed together with the-x-lab at Penn State University.
+				We discovered a disconnect between what people thought they signed up for and what they were paying.
+				From my point of view, one of the major accomplishments of this campaign was transparency in pricing by 
+				requiring providers to display a "Broadband Facts Label"
+				to gather data on US broadband costs, quality, and speeds by having consumers upload bills, aiming to advocate for better, fairer, and affordable internet access for all by revealing industry practices
+				highlighting the need for universal, affordable high-speed internet for work, school, and healthcare
+				A crowdsourcing project asking people to share their internet bills and speed test results. 
+				To get real data on costs and speeds, bypassing limited government info.
+				Data Collection: Gather data on what people actually pay for and receive. -->
+
+				<!-- <div class="bar"></div> -->
+
+
+				<!-- <div>
+					<h3>
+						creative uses of technology
+						<span> | </span>
+						software engineering
+						<span> | </span>
+						research and development
+					</h3>
+	
+				</div> 
+			    <div class="section_white">
+		                <div style="text-align:center;">
+							<h2>
+			                The best outcomes start with a question. 
+							<br/><br/>
+							Is it possible... ?
+							How could we... ?
+
+							</h2>
+							<h4>
+							<br/><br/>I help companies find opportunities.
+							<br/><br/>Text an automobile VIN number to <a href="sms:ENV['TWILIO_FROM_NUMBER']">(646) 233-4264</a>. Our system will tell you something useful about the car.
+							<br/><br/>Snap a photo of an object and text it to <a href="sms:ENV['TWILIO_FROM_NUMBER']">(646) 233-4264</a>. Our system will figure out the object.
+							</h4>
+						</div>
 				</div>
 
 
-
-				<div class="bar"></div>
+				<div style="position:relative;width:100%;height:100vh;overflow:hidden;">
+					<img src="assets/hipster-party-squirrels.webp" alt="Chatty Grey Squirrel at a party" style="width:100%;height:100%;object-fit:cover;">
+				</div>
+ -->
+				<!-- <div class="bar"></div>
 					<a name='#faq'></a>
 					<span id="faq"></span>
 				    <div class="section_white">
-				        <div class="container">
+				        <div class="section_header">
+				            <h2>FAQ</h2>
+				        </div>
 
-				            <div class="row about">
-				                <div class="col-md-12">
-				                    <div class="section_header">
-				                        <h2>FAQ</h2>
-				                    </div>
-				                </div>
-				            </div> <!-- .row -->
+				        <div class="question_holder">
+				            <div><h3>What is Alohabet Concierge?</h3></div>
+				            <div><p style="margin-left:50px;">
+							Alohabet is an easy way to engage with customers, using a familiar SMS platform.
+							</div>
+				        </div>
 
-				            <div class="row">
-				                <div class="col-md-1"></div>
-				                <div class="col-md-10">
-				                    <div class="question_holder">
-				                        <div><h3>What is Alohabet Concierge?</h3></div>
-				                        <div><p style="margin-left:50px;">
-										Alohabet is an easy way to engage with customers, using a familiar SMS platform. 
-										</div>
-				                    </div>
-									
-									<div class="question_holder">
-				                        <div><h3>Why SMS?</h3></div>
-				                        <div><p style="margin-left:50px;">
-											Two-thirds of Americans are now smartphone owners.
-											<br/>Text messaging is the most widely-used smartphone feature.
-											<br/>97% of smartphone owners use text messaging!
-											
-											<br/><i>source:</i> 
-											<a href='http://www.pewinternet.org/2015/04/01/us-smartphone-use-in-2015/'>Pew 
-												Research Center - U.S. Smartphone Use in 2015.</a>
-										</div>
-				                    </div>
+						<div class="question_holder">
+				            <div><h3>Why SMS?</h3></div>
+				            <div><p style="margin-left:50px;">
+								Two-thirds of Americans are now smartphone owners.
+								<br/>Text messaging is the most widely-used smartphone feature.
+								<br/>97% of smartphone owners use text messaging!
 
-				                    <div class="question_holder">
-				                        <div><h3>Do standard text messaging and data rates apply?</h3></div>
-				                        <div><p style="margin-left:50px;">Yes.</p></div>
-				                    </div>
-				                    <div class="question_holder">
-				                        <div><h3>I have another question.</h3></div>
-				                        <div><p style="margin-left:50px;">Great! Shoot us a text message. We'll respond if we're not busy.</p></div>
-				                    </div>
+								<br/><i>source:</i>
+								<a href='http://www.pewinternet.org/2015/04/01/us-smartphone-use-in-2015/'>Pew
+									Research Center - U.S. Smartphone Use in 2015.</a>
+							</div>
+				        </div>
 
-				                </div>
-				                <div class="col-md-1"></div>
-				            </div> <!-- .row -->
+				        <div class="question_holder">
+				            <div><h3>Do standard text messaging and data rates apply?</h3></div>
+				            <div><p style="margin-left:50px;">Yes.</p></div>
+				        </div>
+				        <div class="question_holder">
+				            <div><h3>I have another question.</h3></div>
+				            <div><p style="margin-left:50px;">Great! Shoot us a text message. We'll respond if we're not busy.</p></div>
+				        </div>
 
+				        <div class="section_header">
+				            <h2>&#119046; <a href="#">BACK </a>&#119047;</h2>
+				        </div>
+				    </div>
+ -->
 
-				            <div class="row about">
-				                <div class="col-md-12">
-				                    <div class="section_header">
-				                        <h2>&#119046; <a href="#">BACK </a>&#119047;</h2>
-				                    </div>
-				                </div>
-				            </div> <!-- .row -->
-
-
-				        </div> <!-- .container -->
-				    </div> <!-- .section_white -->
-		
-					
 <script>
 
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
