@@ -84,6 +84,12 @@ Access in views:
 
 **Note:** MP4 format is preferred for web use (better browser support, smaller size, hardware acceleration on iOS). WebP animations have poor quality and limited support on iPhones. To convert WebP to MP4: `ffmpeg -i input.webp -c:v libx264 -pix_fmt yuv420p -movflags +faststart output.mp4`
 
+**iPhone Autoplay:** For video autoplay on iPhone/iOS:
+- Required attributes: `muted`, `playsinline`, `autoplay`
+- JavaScript fallback: Try to play on user interaction if autoplay fails
+- Hide controls: Use CSS webkit selectors to hide play button
+- Test on actual device as desktop Safari differs from iOS Safari/Chrome
+
 ### Stylesheets → app/assets/stylesheets/
 ```
 app/assets/stylesheets/

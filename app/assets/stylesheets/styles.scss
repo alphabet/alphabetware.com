@@ -25,6 +25,22 @@ body {
     width: 100%;
 }
 
+.video-background video::-webkit-media-controls {
+    display: none !important;
+}
+
+.video-background video::-webkit-media-controls-enclosure {
+    display: none !important;
+}
+
+.video-background video::-webkit-media-controls-panel {
+    display: none !important;
+}
+
+.video-background video::-webkit-media-controls-play-button {
+    display: none !important;
+}
+
 
 body, h1, h2, h3, h4, h5, h6 {
     font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;

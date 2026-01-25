@@ -9,7 +9,7 @@
 <body>
 
 	<div class="video-background">
-		<%= video_tag 'chatty-grey-squirrel.mp4', autoplay: true, loop: true, muted: true, playsinline: true %>
+		<%= video_tag 'chatty-grey-squirrel.mp4', autoplay: true, loop: true, muted: true, playsinline: true, id: 'bg-video' %>
 	</div>
 
 	<div class="cover" aria-label="A Chatty Grey Squirrel. By Gui Weinmann. Grey Squirrels are common the wild. Good luck catching one!">
@@ -276,6 +276,29 @@
   </script>
 
   <script>
+  	// Force video autoplay on mobile devices
+  	document.addEventListener('DOMContentLoaded', function() {
+  		var video = document.getElementById('bg-video');
+  		if (video) {
+  			// Try to play the video
+  			var playPromise = video.play();
+
+  			if (playPromise !== undefined) {
+  				playPromise.catch(function(error) {
+  					// Autoplay was prevented, try to play on any user interaction
+  					document.addEventListener('touchstart', function playOnTouch() {
+  						video.play();
+  						document.removeEventListener('touchstart', playOnTouch);
+  					}, { once: true });
+
+  					document.addEventListener('click', function playOnClick() {
+  						video.play();
+  						document.removeEventListener('click', playOnClick);
+  					}, { once: true });
+  				});
+  			}
+  		}
+  	});
 
   	function track(p) {
   		console.log ('tracking');
