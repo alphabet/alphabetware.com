@@ -1,41 +1,48 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <%= stylesheet_link_tag 'application', media: 'all' %>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Aloha!</title>
-  <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+	<%= stylesheet_link_tag 'application', media: 'all' %>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<title>Aloha!</title>
+	<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
 </head>
 <body>
 
-			<div class="cover" aria-label="A Chatty Grey Squirrel. By Gui Weinmann. Grey Squirrels are common the wild. Good luck catching one!">
-				<div class="cover__description"
-				roleName="software research engineer"
-				itemtype="https://schema.org/Person">
-					<h4 class="description">Guillermo Weinmann</h4>
-				</div>
+	<div class="video-background">
+		<%= video_tag 'chatty-grey-squirrel.mp4', autoplay: true, loop: true, muted: true, playsinline: true %>
+	</div>
+
+	<div class="cover" aria-label="A Chatty Grey Squirrel. By Gui Weinmann. Grey Squirrels are common the wild. Good luck catching one!">
+		<div class="cover__description"
+		roleName="software research engineer"
+		itemtype="https://schema.org/Person">
+		<h4 class="description">Guillermo Weinmann</h4>
+		</div>
+	</div>
+
+
+<div class="section_white">
+	<div class="section_white__row">
+		<div class="section_white--column_right">
+			INTERESTS and EXPERIMENTS
+		</div>
+	</div>
+
+	<div class="section_white__row">
+		<div class="section_white--column_right">
+			Computer Vision 
+			<span class="workflow">[<a href="./secure/gotires/">See workflow</a>]</span>
+			<P>
+				<b>
+					<a href="https://gotires.alphabetware.com" target=_new>Wheel Swap</a></b>: A simple AI application that detects wheels on two different cars, and swaps them.
+				</P>
 			</div>
+		</div>
 
-
-			    <div class="section_white">
-						<div class="section_white__row">
-							<div class="section_white--column_right">
-								INTERESTS and EXPERIMENTS
-							</div>
-						</div>
-
-						<div class="section_white__row">
-							<div class="section_white--column_right">
-								Computer Vision <P>
-									<b>
-										<a href="https://gotires.alphabetware.com" target=_new>Wheel Swap</a></b>: A simple AI application that detects wheels on two different cars, and swaps them.
-									</P>
-							</div>
-						</div>
-
-						<div class="section_white__row">
-							<div class="section_white--column_right">
-								Privacy, Intellectual Property, and User Generated Content.
+		<div class="section_white__row">
+			<div class="section_white--column_right">
+				Privacy, Intellectual Property, and User Generated Content.
+				<span class="workflow">[<a href="./secure/avu/">See workflow</a>]</span>
 								<!--p>I am interested in privacy and intellectual property rights as they pertain to user generated content (UGC).
 								</p-->
 								<P>
@@ -44,9 +51,9 @@
 								</P>
 								<P>
 									How: Proof of Personhood via Self Soverign Identity (SSI),
-								  the <a href="https://www.w3.org/TR/did-1.1/">DID spec</a>,
-								 blockchain ledger, zero knowledge proofs.
-	             	</P>
+									the <a href="https://www.w3.org/TR/did-1.1/">DID spec</a>,
+									blockchain ledger, zero knowledge proofs.
+								</P>
 								<!--p>While users are "credited" for comments,
 								photos, product reviews, etc., corporations are the ones who profit from user contributions,
 								indefinitely. Social affirmation and targetted ads are the main drivers.
@@ -56,7 +63,7 @@
 									worked in the good old days but much has changed with worldwide adoption, generative AI, and bots.
 								</P-->
 								 <!-- P>Would the network effect be achievable without destruction of IP rights in a liberated system?
-								</P -->
+								 </P -->
 								<!-- p>
 								 Would social networks differ if users had full and perpetual rights to
 								 control their own data? Today's tangled process is one where companies
@@ -102,7 +109,7 @@
 									</ol>
 
 								</P-->
-								<P><a href="./secure">See workflow</a></P>
+
 	            <!--P>
 	            One problem that must be addressed is how to stop anyone with
 				      access to the data from coping the data in place.
@@ -110,31 +117,32 @@
 	            The current state of the art is such that if a bad actor copies the data in place,
 	            the owner is disociated from their data and the thief loses the provenance.
 								But Fully Homomorphic Encryption (FHE) and ZKP can lock down the gap.
-								</P-->
-							</div>
+							</P-->
 						</div>
+					</div>
 
-						<div class="section_white__row">
-							<div class="section_white--column_right">
-								Stable Diffusion and Generative AI<P>
-									<b>Grey Squirrel Smoking a Cigar</b>: A simple t2v animation created using Comfy UI for my workflow and the
-									<a href="https://huggingface.co/tencent/HunyuanVideo" target=_new">Hunyuan Video</a> diffusion model.
-									<a href="./secure/comfyui-workflow.png">See Workflow</a>
-									</P>
-							</div>
+					<div class="section_white__row">
+						<div class="section_white--column_right">
+							Stable Diffusion and Generative AI 
+							<span class="workflow">[<a href="./secure/comfyui-workflow.png">See 	Workflow</a>]</span>
+							<P>
+								<b>Grey Squirrel Smoking a Cigar</b>: A simple t2v animation created using Comfy UI for my workflow and the
+								<a href="https://huggingface.co/tencent/HunyuanVideo" target=_new">Hunyuan Video</a> diffusion model.
+							</P>
 						</div>
+					</div>
 
 				</div>
 
 <%# 			<div class="section_gray">
 			</div>
- %>
-			<div class="section_footer">
-				<h4 class="description not-a-squirrel">this is not a squirrel</h4>
-			</div>
+		%>
+		<div class="section_footer">
+			<h4 class="description not-a-squirrel">this is not a squirrel</h4>
+		</div>
 
-			<div class="section_spacer">
-			</div>
+		<div class="section_spacer">
+		</div>
 
 				<!--div class="section_white">
 					<div class="section_white--column_right">Perhaps insert a presidio demo here</div>
@@ -158,7 +166,7 @@
         Advocacy website
         Experts pages and json-ld
 
- %>
+      %>
 
 
 
@@ -207,9 +215,9 @@
 
 
 				<div style="position:relative;width:100%;height:100vh;overflow:hidden;">
-					<img src="assets/hipster-party-squirrels.webp" alt="Chatty Grey Squirrel at a party" style="width:100%;height:100%;object-fit:cover;">
+					<%= image_tag 'hipster-party-squirrels.webp', alt: 'Chatty Grey Squirrel at a party', style: 'width:100%;height:100%;object-fit:cover;' %>
 				</div>
- -->
+			-->
 				<!-- <div class="bar"></div>
 					<a name='#faq'></a>
 					<span id="faq"></span>
@@ -251,33 +259,33 @@
 				            <h2>&#119046; <a href="#">BACK </a>&#119047;</h2>
 				        </div>
 				    </div>
- -->
+				  -->
 
-<!-- Google tag (gtag.js) -->
+				  <!-- Google tag (gtag.js) -->
 
 
-				<div class="copyright not-a-squirrel">Copyright © 2026 Guillermo Weinmann, all right reserved.</div>
+  <div class="copyright not-a-squirrel">Copyright © 2026 Guillermo Weinmann, all right reserved.</div>
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-CZGCBVFMEW"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CZGCBVFMEW"></script>
+  <script>
+  	window.dataLayer = window.dataLayer || [];
+  	function gtag(){dataLayer.push(arguments);}
+  	gtag('js', new Date());
 
-  gtag('config', 'G-CZGCBVFMEW');
-</script>
+  	gtag('config', 'G-CZGCBVFMEW');
+  </script>
 
-<script>
+  <script>
 
-function track(p) {
-	console.log ('tracking');
-	gtag('event', 'submit', {
-	  'event_category': 'click',
-	  'event_label': 'not-working-yet',
-	  'value': document.getElementById('userText').value
-	});
-	return true;
-}
-</script>
+  	function track(p) {
+  		console.log ('tracking');
+  		gtag('event', 'submit', {
+  			'event_category': 'click',
+  			'event_label': 'not-working-yet',
+  			'value': document.getElementById('userText').value
+  		});
+  		return true;
+  	}
+  </script>
 </body>
 </html>
