@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root 'pages#index'
-  
+  get 'secure', to: 'pages#secure'
+  get 'secure/*filename', to: 'pages#secure_file', as: 'secure_file', format: false
+
   resources :media, except: [:new, :edit]
   resources :messages, except: [:new, :edit]
   # The priority is based upon order of creation: first created -> highest priority.

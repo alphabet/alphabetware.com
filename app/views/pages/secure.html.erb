@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Secure - Aloha!</title>
+  <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+</head>
+<body>
+
+			<div class="cover" aria-label="A Chatty Grey Squirrel. By Gui Weinmann. Grey Squirrels are common the wild. Good luck catching one!">
+				<div class="cover__description">
+					<h4 class="description">Guillermo Weinmann - Secure Area</h4>
+				</div>
+			</div>
+
+			<div class="section_gray">
+				<div class="intro-message">
+					<h1>Secure<br/>Area</h1>
+					<br/><br/>
+					<span class="text-white not-a-squirrel"
+					alt="authenticated access"><br/>authenticated access</span>
+				</div>
+			</div>
+
+			<div class="section_white">
+
+				<div class="section_white__row">
+					<div class="section_white--column_right">
+						<h2>Secure Files</h2>
+						<p><a href="/">Back to Home</a></p>
+
+						<% if @files.empty? %>
+							<p>No files available in the secure directory.</p>
+						<% else %>
+							<table class="file-browser">
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Type</th>
+										<th>Size</th>
+										<th>Modified</th>
+									</tr>
+								</thead>
+								<tbody>
+									<% @files.each do |file| %>
+										<tr>
+											<td>
+												<% if file[:type] == 'file' %>
+													<a href="<%= secure_file_path(file[:name]) %>"><%= file[:name] %></a>
+												<% else %>
+													<%= file[:name] %>
+												<% end %>
+											</td>
+											<td><%= file[:type] %></td>
+											<td><%= file[:size] ? number_to_human_size(file[:size]) : '-' %></td>
+											<td><%= file[:modified].strftime('%Y-%m-%d %H:%M') %></td>
+										</tr>
+									<% end %>
+								</tbody>
+							</table>
+						<% end %>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="section_gray">
+			</div>
+
+			<div class="section_spacer">
+			</div>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CZGCBVFMEW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-CZGCBVFMEW');
+</script>
+
+</body>
+</html>
