@@ -77,6 +77,22 @@ nav.topnav {
     padding: 0;
 }
 
+.section_footer {
+    position: relative;
+    text-align: center;
+}
+
+.section_footer .description {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.section_footer .copyright {
+    bottom: 10px;
+    color: #666;
+    left: 10px;
+    position: absolute;
+}
+
 div.section_header {
     margin-bottom: 30px;
 }
