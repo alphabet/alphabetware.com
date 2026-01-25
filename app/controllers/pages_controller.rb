@@ -5,6 +5,12 @@ class PagesController < ActionController::Base
   def index
   end
 
+  def login_failed
+    # Send 401 with WWW-Authenticate header to clear browser's cached credentials
+    response.headers['WWW-Authenticate'] = 'Basic realm="Lo! Secure Area."'
+    render status: :unauthorized
+  end
+
   def secure
     @secure_path = Rails.root.join('storage', 'secure')
     @files = list_directory_contents(@secure_path)
@@ -54,14 +60,32 @@ class PagesController < ActionController::Base
     yaml_data = load_yaml_data
     auth_message = yaml_data['auth_message'] || 'Secure Area Access'
 
-    authenticate_or_request_with_http_basic(auth_message) do |username, password|
+    # Check if credentials were provided
+    if request.authorization.present?
+      # User is attempting to authenticate
+      username, password = ActionController::HttpAuthentication::Basic::user_name_and_password(request)
+
       credentials = yaml_data['credentials'] || []
       valid_credential = credentials.find do |cred|
         cred['username'] == username &&
         cred['password'] == password &&
         credential_active?(cred)
       end
-      valid_credential.present?
+
+      if valid_credential.present?
+        # Authentication successful
+        return true
+      else
+        # Wrong credentials provided - redirect to login failed page
+        redirect_to login_failed_path
+        return false
+      end
+    else
+      # No credentials provided - send 401 with login-failed page as body
+      # This shows the auth dialog, but if user clicks cancel, they see login-failed page
+      response.headers['WWW-Authenticate'] = %(Basic realm="#{auth_message}")
+      render 'pages/login_failed', status: :unauthorized, layout: false
+      return false
     end
   end
 

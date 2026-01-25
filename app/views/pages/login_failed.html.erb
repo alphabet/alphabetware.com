@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login Failed</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      align-items: center;
+      background-color: #fff;
+      display: flex;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      height: 100vh;
+      justify-content: center;
+      width: 100vw;
+    }
+
+    .container {
+      max-width: 600px;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .error-block {
+      background-color: #000;
+      color: #fff;
+      font-size: 120px;
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 40px;
+      padding: 60px 40px;
+      text-transform: uppercase;
+    }
+
+    .message {
+      color: #000;
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 60px;
+      text-transform: uppercase;
+    }
+
+    .message span {
+      color: #d00;
+    }
+
+    .back-link {
+      background-color: #000;
+      color: #fff;
+      display: inline-block;
+      font-size: 24px;
+      font-weight: 700;
+      padding: 20px 60px;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    .back-link:hover {
+      background-color: #d00;
+    }
+
+    @media(max-width: 600px) {
+      .error-block {
+        font-size: 72px;
+        padding: 40px 20px;
+      }
+
+      .message {
+        font-size: 24px;
+      }
+
+      .back-link {
+        font-size: 18px;
+        padding: 16px 40px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="message">Login <span>Failed</span></div>
+    <a href="/" class="back-link">Go Home</a>
+  </div>
+</body>
+</html>

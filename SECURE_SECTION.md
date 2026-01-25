@@ -61,6 +61,8 @@ URL: `/secure` or `./secure`
 
 Browser will prompt for username/password.
 
+Failed login attempts redirect to `/login-failed` page.
+
 ## Security Notes
 
 - `config/secure_credentials.yml` is in `.gitignore` - credentials not committed

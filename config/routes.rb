@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root 'pages#index'
   get 'secure', to: 'pages#secure'
   get 'secure/*filename', to: 'pages#secure_file', as: 'secure_file', format: false
+  get 'login-failed', to: 'pages#login_failed'
 
   resources :media, except: [:new, :edit]
   resources :messages, except: [:new, :edit]
