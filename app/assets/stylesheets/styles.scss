@@ -202,6 +202,11 @@ div.about p a {
     .section_white--column_right {
         padding: 30px 20px;
     }
+
+    .cover {
+        height: 100dvh;
+        min-height: 100vh;
+    }
 }
 
 .copyright {
@@ -331,17 +336,32 @@ table.pricing_table td.header_col {
 }
 
 .cover {
+    align-items: stretch;
+    display: grid;
+    grid-template-rows: 1fr auto;
     height: 100vh;
+    height: 100svh;
+    height: calc(var(--vh, 1vh) * 100);
+    margin-bottom: 0;
+    min-height: 600px;
     overflow: hidden;
-    position: relative;
     width: 100%;
 }
+
 .cover__description {
-    bottom: 0;
+    align-self: end;
+    grid-row: 2;
     left: 0;
-    position: absolute;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    position: relative;
     right: 0;
     text-align: center;
+}
+
+.cover + .section_white {
+    margin-top: 0;
+    padding-top: 0;
 }
 .cover__description .description {
     background: rgba(255, 255, 255, 0.5);
