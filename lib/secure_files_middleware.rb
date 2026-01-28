@@ -7,7 +7,7 @@ class SecureFilesMiddleware
     request = Rack::Request.new(env)
 
     # Only intercept /secure/* paths (but not /secure itself for directory listing)
-    if request.path.start_with?('/secure/') && request.get?
+    if request.path.start_with?('/secure/') && (request.get? || request.head?)
       handle_secure_file(env, request)
     else
       @app.call(env)
@@ -26,18 +26,24 @@ class SecureFilesMiddleware
     path_info = request.path.sub('/secure/', '')
     file_path = Rails.root.join('storage', 'secure', path_info)
 
-    # Security check: ensure file is within secure directory
-    secure_dir = Rails.root.join('storage', 'secure').to_s
-    begin
-      unless file_path.realpath.to_s.start_with?(secure_dir)
-        return [403, {'Content-Type' => 'text/plain'}, ['Forbidden']]
-      end
-    rescue Errno::ENOENT
+    # Check if file/directory exists first
+    unless File.exist?(file_path)
       return [404, {'Content-Type' => 'text/plain'}, ['Not Found']]
+    end
+
+    # Security check: ensure file is within secure directory
+    secure_dir = Rails.root.join('storage', 'secure').realpath.to_s
+    unless file_path.realpath.to_s.start_with?(secure_dir)
+      return [403, {'Content-Type' => 'text/plain'}, ['Forbidden']]
     end
 
     # Handle directory by looking for index.html
     if File.directory?(file_path)
+      # Redirect to add trailing slash if missing (for correct relative URLs)
+      unless request.path.end_with?('/')
+        return [301, {'Location' => request.path + '/', 'Content-Type' => 'text/html'}, ['Moved Permanently']]
+      end
+
       index_path = file_path.join('index.html')
       if File.exist?(index_path) && File.file?(index_path)
         file_path = index_path
