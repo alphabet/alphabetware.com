@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AVU Wallet Demo</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js"></script>
+    <link rel="stylesheet" href="avu.css">
+</head>
+<body>
+    <h1>AVU Wallet Demo</h1>
+    <p>Experience anonymized verified user identity in action</p>
+
+    <!-- Step 1: Identity Setup → Architecture Step 1 -->
+    <div class="step">
+        <h2>STEP 1: Identity Setup</h2>
+        <p>Real user verifies identity with Identity Provider (IDP). Capture photo for one-time KYC verification.</p>
+        <a href="#identityBtn" id="identityBtn">Start Identity Verification</a>
+        <button id="captureBtn" style="display:none;">Capture Photo</button>
+        <div id="identityOutput" class="output" style="display:none;"></div>
+        <video id="identityVideo" style="display:none; width: 100%; max-width: 400px; margin-top: 10px;" autoplay></video>
+        <canvas id="identityCanvas" style="display:none;"></canvas>
+    </div>
+
+<hr/>
+    <!-- Demo Step 2 → Architecture Steps 2-3 -->
+    <div class="step">
+        <h2>STEP 2: Get Anonymous Credential + Register on Blockchain</h2>
+        <p>Register a biometric authentication (WebAuthn).
+             In production, this will be used to unlock a wallet that holds your credential from the Identity Provider (IDP), and your anonymous DID is registered on the blockchain ledger.</p>
+        <button id="registerBtn" disabled>Register Biometric</button>
+        <div id="registerOutput" class="output" style="display:none;"></div>
+    </div>
+
+    <!-- Demo Step 3 → Architecture Steps 2-3 -->
+    <div class="step">
+        <h2>STEP 3: Create Crypto Wallet</h2>
+        <p>Generate your anonymous identity (DID) using crypto wallet. In production, this DID would be registered on Hyperledger blockchain and the wallet stores your keys and credentials.</p>
+        <button id="createWalletBtn" disabled>Create Wallet</button>
+        <div id="walletOutput" class="output" style="display:none;"></div>
+        <div id="blockchainDataviz" style="display:none;"></div>
+    </div>
+
+    <!-- Demo Step 4 → Architecture Steps 4-5 -->
+    <div class="step">
+        <h2>STEP 4: Anonymized User Submits Data</h2>
+        <p>Use a biometric to unlock the wallet, then sign data with private key. </p>
+        <p>This allows us to trust that the data is coming from a verified user.</p>
+        <P>None of the data is associated with your real identity. The data is associated with your anonymous identity (DID) on the blockchain.</P>
+        <P>You can submit data to the system anonymously.</P>
+        <P>You can also revoke access to the data at any time.</P>
+        <P>In production, this encrypted data with proof goes to your submission system API, which stores it in encrypted storage.</p>
+        <input type="text" id="dataInput" placeholder="Enter data to submit (e.g., medical record ID)" disabled>
+        <button id="submitBtn" disabled>Sign & Submit Data</button>
+        <div id="submitOutput" class="output" style="display:none;"></div>
+    </div>
+
+    <!-- Demo Step 5 → Architecture Step 5 -->
+    <div class="step">
+        <h2>STEP 5: Store & Verify</h2>
+        <p>Verify that signature matches the anonymous DID. In production, your system checks this against the blockchain ledger and stores the verified data.</p>
+        <button id="verifyBtn" disabled>Verify Signature</button>
+        <div id="verifyOutput" class="output" style="display:none;"></div>
+    </div>
+
+    <!-- What's Missing Section -->
+    <div class="step">
+        <h2>What's Missing from This Demo</h2>
+        <p><strong>Architecture Step 6: Third Party Access</strong> - Permission to specific data, via access tokens</p>
+        <P>See workflow diagrams for more details:
+            <br/>
+            &bull; Step 6: <a href="avu-step6-simple-default-allow.png">Default Allow</a>
+            <br/>
+            &bull; Step 6: <a href="avu-step6-simple-default-deny.png">Default Deny</a>
+        </p>
+        <p><strong>Hyperledger integration</strong> - Demo uses local verification; production checks Hyperledger</p>
+    </div>
+
+    <script>
+        let credentialId = null;
+        let wallet = null;
+        let lastSignature = null;
+        let lastMessage = null;
+
+        // STEP 1: Register WebAuthn
+        document.getElementById('registerBtn').addEventListener('click', async () => {
+            const output = document.getElementById('registerOutput');
+            output.style.display = 'block';
+            output.innerHTML = '<span class="info">Waiting for biometric authentication...</span>';
+
+            try {
+                const challenge = new Uint8Array(32);
+                crypto.getRandomValues(challenge);
+
+                const credential = await navigator.credentials.create({
+                    publicKey: {
+                        challenge: challenge,
+                        rp: { name: "AVU Demo" },
+                        user: {
+                            id: new Uint8Array(16),
+                            name: "anonymous.user@avu.demo",
+                            displayName: "Anonymous User"
+                        },
+                        pubKeyCredParams: [
+                            { alg: -7, type: "public-key" },  // ES256
+                            { alg: -257, type: "public-key" } // RS256
+                        ],
+                        authenticatorSelection: {
+                            authenticatorAttachment: "platform",
+                            userVerification: "required"
+                        },
+                        timeout: 60000
+                    }
+                });
+
+                credentialId = credential.id;
+                output.innerHTML = `<span class="success">Biometric registered!</span><br>
+                    <span class="info">Credential ID: ${credentialId.substring(0, 32)}...</span>`;
+                
+                document.getElementById('createWalletBtn').disabled = false;
+            } catch (error) {
+                output.innerHTML = `<span class="error">Error: ${error.message}</span><br>
+                    <span class="info">Make sure you're using a regular browser window (not incognito) and have biometric hardware.</span>`;
+            }
+        });
+
+        // STEP 2: Create Wallet
+        document.getElementById('createWalletBtn').addEventListener('click', async () => {
+            const output = document.getElementById('walletOutput');
+            output.style.display = 'block';
+            output.innerHTML = '<span class="info">Generating wallet...</span>';
+
+            try {
+                // Generate random wallet
+                wallet = ethers.Wallet.createRandom();
+
+                output.innerHTML = `<span class="success">Wallet created!</span><br>
+                    <span class="info">Anonymous DID (Public Address): ${wallet.address}</span><br>
+                    <span class="info">Private key is encrypted and stored securely</span>`;
+                
+                // Display blockchain contract dataviz
+                displayBlockchainDataviz(wallet.address);
+                
+                document.getElementById('dataInput').disabled = false;
+                document.getElementById('submitBtn').disabled = false;
+            } catch (error) {
+                output.innerHTML = `<span class="error">Error: ${error.message}</span>`;
+            }
+        });
+
+        // STEP 3: Submit Data
+        document.getElementById('submitBtn').addEventListener('click', async () => {
+            const output = document.getElementById('submitOutput');
+            const dataInput = document.getElementById('dataInput');
+            output.style.display = 'block';
+
+            if (!dataInput.value.trim()) {
+                output.innerHTML = '<span class="error">Please enter some data to submit</span>';
+                return;
+            }
+
+            output.innerHTML = '<span class="info">Requesting biometric verification...</span>';
+
+            try {
+                // Request biometric authentication
+                const challenge = new Uint8Array(32);
+                crypto.getRandomValues(challenge);
+
+                const assertion = await navigator.credentials.get({
+                    publicKey: {
+                        challenge: challenge,
+                        timeout: 60000,
+                        userVerification: "required"
+                    }
+                });
+
+                output.innerHTML = '<span class="info">Biometric verified! Signing data...</span>';
+
+                // Sign the data
+                lastMessage = dataInput.value;
+                lastSignature = await wallet.signMessage(lastMessage);
+
+                output.innerHTML = `<span class="success">Data signed successfully!</span><br>
+                    <span class="info">Data: "${lastMessage}"</span><br>
+                    <span class="info">Signature: ${lastSignature.substring(0, 32)}...${lastSignature.substring(lastSignature.length - 8)}</span><br>
+                    <span class="info">Signed by DID: ${wallet.address}</span>`;
+
+                document.getElementById('verifyBtn').disabled = false;
+            } catch (error) {
+                output.innerHTML = `<span class="error">Error: ${error.message}</span>`;
+            }
+        });
+
+        // Display blockchain contract dataviz
+        function displayBlockchainDataviz(address) {
+            const dataviz = document.getElementById('blockchainDataviz');
+            dataviz.style.display = 'block';
+            
+            dataviz.innerHTML = `
+                <div class="homer-passport-viz">
+                    <div class="homer-container">
+                        <img src="https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/homer-simpson-donut-ehauss-design.jpg" alt="Homer Simpson eating a pink donut" class="homer-image">
+                        <div class="ss-card">
+                            <div class="ss-header">
+                                <div class="ss-emblem">
+                                    🛡️
+                                </div>
+                            </div>
+                            <div class="ss-content">
+                                <div class="ss-label">Anonymous DID</div>
+                                <div class="ss-number">${address}</div>
+                                <div class="ss-status">✓ Verified</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="homer-message">Your anonymous identity is ready!</div>
+                </div>
+            `;
+        }
+
+        // STEP 4: Verify Signature
+        document.getElementById('verifyBtn').addEventListener('click', async () => {
+            const output = document.getElementById('verifyOutput');
+            output.style.display = 'block';
+            output.innerHTML = '<span class="info">Verifying signature...</span>';
+
+            try {
+                // Recover the address from the signature
+                const recoveredAddress = ethers.verifyMessage(lastMessage, lastSignature);
+
+                const isValid = recoveredAddress.toLowerCase() === wallet.address.toLowerCase();
+
+                if (isValid) {
+                    output.innerHTML = `<span class="success">SIGNATURE VALID!</span><br>
+                        <span class="info">Message: "${lastMessage}"</span><br>
+                        <span class="info">Verified DID: ${recoveredAddress}</span><br>
+                        <span class="success">This proves the data came from a verified anonymized user!</span>`;
+                } else {
+                    output.innerHTML = `<span class="error">SIGNATURE INVALID</span><br>
+                        <span class="info">Expected: ${wallet.address}</span><br>
+                        <span class="info">Got: ${recoveredAddress}</span>`;
+                }
+            } catch (error) {
+                output.innerHTML = `<span class="error">Error: ${error.message}</span>`;
+            }
+        });
+    </script>
+    <script src="identity.js"></script>
+</body>
+</html>

@@ -1,0 +1,186 @@
+html {
+    scroll-behavior: smooth;
+}
+body {
+    font-family: system-ui, -apple-system, sans-serif;
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #0a0a0a;
+    color: #fff;
+}
+a, a:visited {
+    color: rgb(0, 234, 0);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.step {
+    background: #1a1a1a;
+    border: 2px solid #fff;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+}
+button, a#identityBtn {
+    background: #fff;
+    color: #000;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    margin: 10px 10px 10px 0;
+    text-decoration: none;
+    display: inline-block;
+}
+button:hover, a#identityBtn:hover {
+    background: #ddd;
+}
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+.output {
+    background: #000;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 13px;
+    word-wrap: break-word;
+    border: 1px solid #333;
+}
+.success { color: #4ade80; }
+.error { color: #f87171; }
+.info { color: #60a5fa; }
+h1 { border-bottom: 3px solid #fff; padding-bottom: 10px; }
+h2 { margin-top: 0; font-size: 20px; }
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    background: #000;
+    color: #fff;
+    border: 1px solid #333;
+    border-radius: 4px;
+    margin: 10px 0;
+}
+
+/* Homer Simpson with Passport Dataviz */
+.homer-passport-viz {
+    background: linear-gradient(135deg, #fff8e1 0%, #ffe082 100%);
+    border: 3px solid #ffc107;
+    border-radius: 16px;
+    padding: 30px;
+    margin: 20px 0;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(255, 193, 7, 0.3);
+}
+
+.homer-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.homer-image {
+    max-width: 300px;
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* Social Security Card */
+.ss-card {
+    width: 240px;
+    height: 140px;
+    background: #fefefe;
+    border: 2px solid #003366;
+    border-radius: 2px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    transform: rotate(-5deg);
+    transition: transform 0.3s ease;
+    font-family: 'Times New Roman', serif;
+}
+
+.ss-card:hover {
+    transform: rotate(0deg) scale(1.05);
+}
+
+.ss-header {
+    background: #003366;
+    color: #fff;
+    padding: 8px 12px;
+    text-align: center;
+    border-bottom: 1px solid #000;
+    flex-shrink: 0;
+}
+
+.ss-emblem {
+    font-size: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+.ss-content {
+    padding: 12px 15px;
+    font-size: 11px;
+    color: #000;
+    text-align: left;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.ss-label {
+    font-weight: normal;
+    margin-bottom: 6px;
+    color: #333;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.ss-number {
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    word-break: break-all;
+    color: #000;
+    margin-bottom: 8px;
+    line-height: 1.3;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.ss-status {
+    color: #4ade80;
+    font-weight: bold;
+    font-size: 10px;
+    text-align: center;
+    padding: 4px 8px;
+    background: rgba(74, 222, 128, 0.1);
+    border-radius: 3px;
+    border: 1px solid #4ade80;
+}
+
+.homer-message {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #1a237e;
+    font-weight: bold;
+}
