@@ -1,6 +1,6 @@
 class PagesController < ActionController::Base
   layout false
-  before_action :authenticate_with_yaml, only: [:secure, :secure_file]
+  before_action :authenticate_with_yaml, only: [:secure]
 
   def index
   end
@@ -14,28 +14,6 @@ class PagesController < ActionController::Base
   def secure
     @secure_path = Rails.root.join('storage', 'secure')
     @files = list_directory_contents(@secure_path)
-  end
-
-  def secure_file
-    file_path = Rails.root.join('storage', 'secure', params[:filename])
-
-    # Security check: ensure file is within secure directory
-    secure_dir = Rails.root.join('storage', 'secure').to_s
-    unless file_path.realpath.to_s.start_with?(secure_dir)
-      head :forbidden
-      return
-    end
-
-    if File.exist?(file_path) && File.file?(file_path)
-      content_type = get_content_type(file_path)
-      send_file file_path,
-                disposition: 'inline',
-                type: content_type
-    else
-      head :not_found
-    end
-  rescue Errno::ENOENT
-    head :not_found
   end
 
   private
@@ -109,36 +87,5 @@ class PagesController < ActionController::Base
     active = today >= active_at if active_at
     active = active && today <= inactive_at if inactive_at
     active
-  end
-
-  def get_content_type(file_path)
-    extension = File.extname(file_path)[1..-1]&.downcase
-
-    content_types = {
-      'txt' => 'text/plain',
-      'html' => 'text/html',
-      'htm' => 'text/html',
-      'css' => 'text/css',
-      'js' => 'application/javascript',
-      'json' => 'application/json',
-      'xml' => 'application/xml',
-      'pdf' => 'application/pdf',
-      'jpg' => 'image/jpeg',
-      'jpeg' => 'image/jpeg',
-      'png' => 'image/png',
-      'gif' => 'image/gif',
-      'webp' => 'image/webp',
-      'svg' => 'image/svg+xml',
-      'mp4' => 'video/mp4',
-      'webm' => 'video/webm',
-      'mp3' => 'audio/mpeg',
-      'wav' => 'audio/wav',
-      'ogg' => 'audio/ogg',
-      'zip' => 'application/zip',
-      'gz' => 'application/gzip',
-      'tar' => 'application/x-tar'
-    }
-
-    content_types[extension] || 'application/octet-stream'
   end
 end
