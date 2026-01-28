@@ -35,6 +35,12 @@ Rails.application.configure do
   # yet still be able to expire them through the digest params.
   config.assets.digest = true
 
+  # Set cache control headers for video assets (7 days = 604800 seconds)
+  config.public_file_server.headers = {
+    'Cache-Control' => 'public, max-age=604800',
+    'Expires' => 7.days.from_now.to_formatted_s(:rfc822)
+  }
+
   # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
 
   # Specifies the header that your server uses for sending files.
