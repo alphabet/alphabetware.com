@@ -81,9 +81,15 @@ class SecureFilesMiddleware
     yaml_data = load_yaml_data
     auth_message = yaml_data['auth_message'] || 'Secure Area Access'
 
+    # Render the login_failed view
+    html = ActionController::Base.new.render_to_string(
+      template: 'pages/401',
+      layout: false
+    )
+
     [401,
      {'Content-Type' => 'text/html', 'WWW-Authenticate' => %(Basic realm="#{auth_message}")},
-     ['Unauthorized']]
+     [html]]
   end
 
   def serve_file(file_path)
