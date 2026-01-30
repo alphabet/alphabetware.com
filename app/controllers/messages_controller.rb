@@ -42,7 +42,7 @@ class MessagesController < ApplicationController
       # TODO: when a user posts a message, create a channel for that users SMS number
       
 		  # post message in slack
-		  slack_url = 'ENV['SLACK_WEBHOOK_URL']'
+		  slack_url = ENV['SLACK_WEBHOOK_URL']
 		  slack_payload = {channel: "#general", username: @incoming.from_phone.to_s + " - #{@incoming.from_city}", text: @incoming.body,  icon_emoji: ":telephone_receiver:"}
 		  # post the message to slack
 		  slack = Typhoeus.post(slack_url, body: slack_payload.to_json)
